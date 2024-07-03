@@ -1,0 +1,44 @@
+{
+	"types": [
+		{
+			"type": "feat",
+			"section": "Features"
+		},
+		{
+			"type": "fix",
+			"section": "Bug Fixes"
+		},
+		{
+			"type": "chore",
+			"hidden": true
+		},
+		{
+			"type": "docs",
+			"hidden": true
+		},
+		{
+			"type": "style",
+			"hidden": true
+		},
+		{
+			"type": "refactor",
+			"hidden": true
+		},
+		{
+			"type": "perf",
+			"hidden": true
+		},
+		{
+			"type": "test",
+			"hidden": true
+		}
+	],
+	"commitUrlFormat": "https://github.com/WEBzaytsev/djun/commits/{{hash}}",
+	"compareUrlFormat": "https://github.com/WEBzaytsev/djun/compare/{{previousTag}}...{{currentTag}}",
+	"bumpFiles": [
+		{
+			"filename": "MY_VERSION_TRACKER.txt",
+			"type": "plain-text"
+		}
+	]
+}

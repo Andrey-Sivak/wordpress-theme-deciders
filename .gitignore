@@ -1,0 +1,74 @@
+/.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# PHPStorm
+.idea/*
+
+# WordPress
+*.log
+/wp-*.php
+/xmlrpc.php
+/license.txt
+/readme.html
+/sitemap.xml
+/sitemap.xml.gz
+
+# ignore packaged files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# track these files, if they exist
+!.gitignore
+!.editorconfig
+!.phpcs.xml.dist
+!README.md
+!CHANGELOG.md
+!composer.json
+
+# track favicon files, if they exist
+!android-chrome-*.png
+!apple-touch-icon*.png
+!browserconfig.xml
+!favicon*.png
+!favicon*.ico
+!manifest.json
+!mstile-*.png
+!safari-pinned-tab.svg
+!site.webmanifest
+
+# ignore compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ignore log files and databases
+*.sql
+*.sqlite
+*.DS_Store
+
+# ignore node dependency directories
+node_modules/
+vendor/
+/backup*
+dist/
+.eslintcache

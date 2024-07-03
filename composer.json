@@ -1,0 +1,67 @@
+{
+    "name": "deciders/wordpress-theme",
+    "type": "wordpress-theme",
+    "description": "",
+    "keywords": [
+        "WordPress",
+        "Themes"
+    ],
+    "homepage": "https://github.com/WEBzaytsev/deciders",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "WEBzaytsev && Contributors",
+            "homepage": "https://github.com/WEBzaytsev/deciders/graphs/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "automattic/vipwpcs": "^2.3",
+        "brainmaestro/composer-git-hooks": "^2.8",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+        "ergebnis/composer-normalize": "^2.28",
+        "phpcompatibility/php-compatibility": "*",
+        "phpcompatibility/phpcompatibility-wp": "*",
+        "sirbrillig/phpcs-variable-analysis": "*",
+        "wp-cli/wp-cli": "^v2.6.0",
+        "wp-coding-standards/wpcs": "*"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@install-codestandards",
+            "cghooks add --ignore-lock"
+        ],
+        "post-update-cmd": [
+            "cghooks update"
+        ],
+        "blocks:create": "php create-acf-block.php",
+        "blocks:register": "php generate-block-registration.php",
+        "install-codestandards": [
+            "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
+        ],
+        "lint:php": "@php ./vendor/bin/parallel-lint --exclude .git --exclude vector-images --exclude node-modules --exclude vendor .",
+        "lint:wpcs": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
+        "make-pot": "wp i18n make-pot . languages/op.pot",
+        "phpcbf": "phpcbf",
+        "phpcbf-wp": [
+            "phpcbf -p -s -v -n ./ --standard=phpcs.xml"
+        ],
+        "phpcs": "phpcs",
+        "phpcs-wp": [
+            "phpcs -p -s -v -n ./ --standard=phpcs.xml"
+        ],
+        "phpcsi": "phpcs -i"
+    },
+    "support": {
+        "issues": "https://github.com/WEBzaytsev/deciders/issues",
+        "source": "https://github.com/WEBzaytsev/deciders"
+    }
+}
