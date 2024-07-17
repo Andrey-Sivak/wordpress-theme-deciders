@@ -219,6 +219,7 @@ require get_template_directory() . '/inc/custom-post-type.php';
 
 require get_template_directory() . '/inc/case-service-relationship.php';
 require get_template_directory() . '/inc/service-icon-metabox.php';
+require get_template_directory() . '/inc/case-gallery-admin/index.php';
 
 require get_template_directory() . '/inc/theme-admin-settings/index.php';
 

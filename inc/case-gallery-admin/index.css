@@ -1,0 +1,27 @@
+.case-gallery-wrapper {
+    margin-top: 15px;
+}
+#case-gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.gallery-image-wrapper {
+    position: relative;
+    width: 150px;
+}
+.gallery-image-wrapper img {
+    max-width: 100%;
+    height: auto;
+}
+.remove-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    padding: 2px 5px;
+    cursor: pointer;
+}
