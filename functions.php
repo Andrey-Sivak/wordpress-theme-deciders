@@ -208,3 +208,129 @@ require get_template_directory() . '/inc/case-service-relationship.php';
 require get_template_directory() . '/inc/service-icon-metabox.php';
 
 require get_template_directory() . '/inc/theme-admin-settings/index.php';
+
+/**
+ * @param array $options
+ * $options['args'] | array - arguments for query
+ * $options['exclude_posts'] | array - posts to exclude
+ * @return array
+ */
+function ds_get_unified_post_types_array(array $options = array()): array
+{
+    $is_exclude_posts = isset($options['exclude_posts']);
+    $defaults = array(
+        'post_count' => 10,
+        'case_count' => 10,
+        'service_count' => -1,
+        'orderby' => 'date',
+        'order' => 'DESC'
+    );
+
+    $args = wp_parse_args($options['args'], $defaults);
+
+    $unified_array = array();
+
+    if (!$is_exclude_posts || !in_array('post', $options['exclude_posts'])) {
+        $posts = get_posts(array(
+            'post_type' => 'post',
+            'posts_per_page' => $args['post_count'],
+            'orderby' => $args['orderby'],
+            'order' => $args['order']
+        ));
+
+        // Get posts
+        foreach ($posts as $post) {
+            $unified_array[] = array(
+                'id' => $post->ID,
+                'title' => $post->post_title,
+                'type' => 'post',
+                'permalink' => get_permalink($post->ID),
+//            'date' => $post->post_date,
+//            'excerpt' => get_the_excerpt($post),
+            );
+        }
+    }
+
+    if (!$is_exclude_posts || !in_array('case', $options['exclude_posts'])) {
+        $cases = get_posts(array(
+            'post_type' => 'case',
+            'posts_per_page' => $args['case_count'],
+            'orderby' => $args['orderby'],
+            'order' => $args['order']
+        ));
+
+        foreach ($cases as $case) {
+//        $associated_service = get_post_meta($case->ID, '_associated_service', true);
+            $unified_array[] = array(
+                'id' => $case->ID,
+                'title' => $case->post_title,
+                'type' => 'case',
+                'permalink' => get_permalink($case->ID),
+//            'associated_service' => $associated_service ? get_the_title($associated_service) : '',
+//            'excerpt' => get_the_excerpt($case),
+//            'date' => $case->post_date,
+            );
+        }
+    }
+
+    if (!$is_exclude_posts || !in_array('service', $options['exclude_posts'])) {
+        $services = get_posts(array(
+            'post_type' => 'service',
+            'posts_per_page' => $args['service_count'],
+            'orderby' => $args['orderby'],
+            'order' => $args['order']
+        ));
+
+        foreach ($services as $service) {
+            $icon_id = get_post_meta($service->ID, '_service_icon_id', true);
+            $unified_array[] = array(
+                'id' => $service->ID,
+                'title' => $service->post_title,
+                'type' => 'service',
+                'excerpt' => get_the_excerpt($service),
+                'permalink' => get_permalink($service->ID),
+                'icon_url' => $icon_id ? wp_get_attachment_image_url($icon_id, 'thumbnail') : '',
+//            'date' => $service->post_date,
+            );
+        }
+    }
+
+    if ($args['orderby'] === 'date') {
+        usort($unified_array, function ($a, $b) use ($args) {
+            $order = ($args['order'] === 'DESC') ? -1 : 1;
+            return $order * (strtotime($b['date']) - strtotime($a['date']));
+        });
+    }
+
+    if ($is_exclude_posts && in_array('service', $options['exclude_posts'])) {
+        return $unified_array;
+    }
+
+    // Separate services from other content
+    $services = array_values(array_filter($unified_array, function ($item) {
+        return $item['type'] === 'service';
+    }));
+    $other_content = array_values(array_filter($unified_array, function ($item) {
+        return $item['type'] !== 'service';
+    }));
+
+    // Reorder the array to place services every 3 items, starting from the 4th position
+    $result = array();
+    $service_index = 0;
+    $other_index = 0;
+
+    for ($i = 0; $i < count($unified_array); $i++) {
+        if ($i > 3 && ($i + 1) % 3 === 1 && $service_index < count($services)) {
+            $result[] = $services[$service_index];
+            $service_index++;
+        } elseif ($other_index < count($other_content)) {
+            $result[] = $other_content[$other_index];
+            $other_index++;
+        } elseif ($service_index < count($services)) {
+            $result[] = $services[$service_index];
+            $service_index++;
+        }
+    }
+
+    return $result;
+}
