@@ -20,7 +20,6 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class( 'bg-deciders-dark px-7.5 font-sf-pro text-white' ); ?>>
+<body <?php body_class( 'bg-deciders-dark px-7.5 font-sf-pro text-white pt-22 relative' ); ?>>
 <?php wp_body_open(); ?>
-<div id="page" class="site">
-	<header class="site-header"></header>
+<header class="site-header bg-[#e7e7e7] fixed z-20 top-0 left-1/2 -translate-x-1/2 rounded-b-[40px] pt-2.5 pb-2 px-13.5"></header>
