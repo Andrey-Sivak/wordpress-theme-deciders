@@ -13,6 +13,13 @@
     }
   }
 
+  &.layout-3 {
+    & .grid-sizer,
+    & .masonry-item {
+      width: calc((100% - 44px) / 3);
+    }
+  }
+
   &.layout-2 {
     & .grid-sizer,
     & .masonry-item {
