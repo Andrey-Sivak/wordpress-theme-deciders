@@ -163,6 +163,8 @@ function ds_scripts() {
     wp_deregister_script('select2');
     wp_dequeue_script('jquery');
     wp_deregister_script('jquery');
+//    wp_dequeue_script('jquery');
+//    wp_deregister_script('jquery');
 
 	wp_enqueue_style( 'ds-style', get_stylesheet_uri(), array(), DS_VERSION );
     wp_enqueue_style('main-style', get_template_directory_uri() . '/dist/css/style.min.css', [], DS_VERSION);
