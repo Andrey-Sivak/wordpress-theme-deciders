@@ -22,7 +22,7 @@ function ds_service_create_post_type() {
     ];
     $args   = [
         'labels'        => $labels,
-        'has_archive'   => true,
+        'has_archive'   => false,
         'public'        => true,
         'hierarchical'  => true,
         'menu_position' => 5,
