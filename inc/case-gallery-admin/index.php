@@ -41,6 +41,30 @@ function ds_render_case_gallery_meta_box($post)
     <?php
 }
 
+function ds_save_case_gallery_meta_box($post_id) {
+    if (!isset($_POST['case_gallery_meta_box_nonce']) ||
+        !wp_verify_nonce($_POST['case_gallery_meta_box_nonce'], 'case_gallery_meta_box')) {
+        return;
+    }
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    if (isset($_POST['case_gallery_images'])) {
+        $gallery_images = explode(',', sanitize_text_field($_POST['case_gallery_images']));
+        $gallery_images = array_filter($gallery_images);
+        update_post_meta($post_id, '_case_gallery_images', $gallery_images);
+    } else {
+        delete_post_meta($post_id, '_case_gallery_images');
+    }
+}
+add_action('save_post', 'ds_save_case_gallery_meta_box');
+
 // Enqueue media uploader script
 function ds_case_gallery_enqueue_scripts(): void
 {
