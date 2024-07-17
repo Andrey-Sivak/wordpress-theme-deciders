@@ -5,7 +5,7 @@ $ds_unified_content = ds_get_unified_post_types_array();
 get_header();
 ?>
 
-    <main class="site-main">
+    <main class="relative z-10">
         <div class="layout-grid layout-4">
             <div class="grid-sizer"></div>
 

@@ -5,7 +5,7 @@ $ds_current_post_type = $post->post_type;
 get_header();
 ?>
 
-    <main class="grid grid-cols-2 gap-x-6 pt-22 items-start">
+    <main class="grid grid-cols-2 gap-x-6 items-start relative z-10">
         <div class="bg-white rounded-[20px] py-15 px-20 text-black">
             <header class="flex items-center mb-7 gap-x-3">
                 <?php
