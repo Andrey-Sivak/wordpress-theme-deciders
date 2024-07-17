@@ -1,0 +1,33 @@
+.layout-grid {
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  &.layout-4 {
+    & .grid-sizer,
+    & .masonry-item {
+      width: calc((100% - 66px) / 4);
+    }
+  }
+
+  &.layout-2 {
+    & .grid-sizer,
+    & .masonry-item {
+      width: calc((100% - 22px) / 2);
+    }
+  }
+
+  & .masonry-item {
+    float: left;
+    padding-bottom: 26px;
+
+    & > img {
+      width: 100%;
+      display: block;
+      max-width: 100%;
+    }
+  }
+}
