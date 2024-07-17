@@ -37,23 +37,29 @@ get_header();
                 <div class="grid-sizer"></div>
                 <?php
                 $ds_unified_content = null;
+                $ds_gallery_images = null;
+                $ds_is_single_post = $ds_current_post_type == 'post';
+                $ds_is_single_case = $ds_current_post_type == 'case';
+                $ds_is_single_service = $ds_current_post_type == 'service';
 
-                if ($ds_current_post_type == 'post') {
+                if ($ds_is_single_post) {
                     $ds_unified_content = ds_get_unified_post_types_array(array(
                         'exclude_posts' => array('case', 'service')
                     ));
-                } elseif ($ds_current_post_type == 'case') {
-//                    $ds_unified_content = null;
-                } elseif ($ds_current_post_type == 'service') {
+                } elseif ($ds_is_single_service) {
                     $ds_unified_content = ds_get_unified_post_types_array(array(
                         'exclude_posts' => array('post', 'service')
                     ));
+                } elseif ($ds_is_single_case) {
+                    $ds_gallery_images = get_post_meta($post->ID, '_case_gallery_images', true) ?? array();
                 }
                 ?>
 
                 <?php
-                if (!empty($ds_unified_content) && count($ds_unified_content) > 0) {
+                if (!empty($ds_unified_content) && count($ds_unified_content)) {
                     get_template_part('/template-parts/post-card', null, ['post' => $ds_unified_content[0]]);
+                } elseif ($ds_is_single_case && count($ds_gallery_images)) {
+                    get_template_part('/template-parts/post-gallery-item', null, ['img_id' => $ds_gallery_images[0]]);
                 }
                 ?>
 
@@ -81,11 +87,22 @@ get_header();
 
                         get_template_part('/template-parts/post-card', null, ['post' => $ds_unified_content_item]);
                     }
+                } elseif ($ds_is_single_case && count($ds_gallery_images) > 1) {
+                    $ds_gallery_images_is_first_item = true;
+                    foreach ($ds_gallery_images as $ds_gallery_image) {
+
+                        if ($ds_gallery_images_is_first_item) {
+                            $ds_gallery_images_is_first_item = false;
+                            continue;
+                        }
+
+                        get_template_part('/template-parts/post-gallery-item', null, ['img_id' => $ds_gallery_image]);
+                    }
                 }
                 ?>
             </div>
         </div>
-	</main>
+    </main>
 
 <?php
 get_footer();
