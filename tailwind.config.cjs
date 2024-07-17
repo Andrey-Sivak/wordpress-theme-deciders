@@ -24,7 +24,7 @@ module.exports = {
                 900: '900ms',
             },
             colors: {
-                'opora-blue': '#0169ED',
+                'deciders-dark': '#191919',
             },
             fontFamily: {
                 'sf-pro': 'SF Pro, sans-serif',
