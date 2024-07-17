@@ -27,8 +27,7 @@ module.exports = {
                 'opora-blue': '#0169ED',
             },
             fontFamily: {
-                'grtsk-tera': 'TRY Grtsk Tera, sans-serif',
-                'grtsk-peta': 'TRY Grtsk Peta, sans-serif',
+                'sf-pro': 'SF Pro, sans-serif',
             },
             lineHeight,
             fontSize,
