@@ -204,4 +204,7 @@ add_action('init', 'ds_service_create_post_type');
 add_action('init', 'ds_case_create_post_type');
 require get_template_directory() . '/inc/custom-post-type.php';
 
+require get_template_directory() . '/inc/case-service-relationship.php';
+require get_template_directory() . '/inc/service-icon-metabox.php';
+
 require get_template_directory() . '/inc/theme-admin-settings/index.php';
