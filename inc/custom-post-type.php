@@ -58,7 +58,7 @@ function ds_case_create_post_type() {
     ];
     $args   = [
         'labels'        => $labels,
-        'has_archive'   => false,
+        'has_archive'   => true,
         'public'        => true,
         'hierarchical'  => true,
         'menu_position' => 6,
