@@ -65,6 +65,14 @@ function ds_theme_register_settings(): void
         'theme_general_section'
     );
 
+    add_settings_field(
+        'home_menu_icon',
+        'Иконка главной страницы в меню',
+        'ds_theme_home_menu_icon',
+        'theme-settings',
+        'theme_general_section'
+    );
+
     add_settings_section(
         'theme_contact_section',
         'Контактные данные',
@@ -124,6 +132,7 @@ function ds_theme_settings_enqueue_scripts($hook): void
     wp_enqueue_media();
     wp_enqueue_script('theme-settings-upload-logo', get_template_directory_uri() . '/inc/theme-admin-settings/js/upload-logo.js', array('jquery'), '1.0', true);
     wp_enqueue_script('theme-settings-upload-default-title-icon', get_template_directory_uri() . '/inc/theme-admin-settings/js/upload-default-title-icon.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('theme-settings-home-menu-icon', get_template_directory_uri() . '/inc/theme-admin-settings/js/upload-home-menu-icon.js', array('jquery'), '1.0', true);
     wp_enqueue_script('theme-settings-social-links', get_template_directory_uri() . '/inc/theme-admin-settings/js/social-links.js', array('jquery'), '1.0', true);
 }
 
@@ -139,3 +148,4 @@ require get_template_directory() . '/inc/theme-admin-settings/callbacks/phone.ph
 require get_template_directory() . '/inc/theme-admin-settings/callbacks/email.php';
 require get_template_directory() . '/inc/theme-admin-settings/callbacks/contact-short-text.php';
 require get_template_directory() . '/inc/theme-admin-settings/callbacks/social-links.php';
+require get_template_directory() . '/inc/theme-admin-settings/callbacks/home-menu-icon.php';
