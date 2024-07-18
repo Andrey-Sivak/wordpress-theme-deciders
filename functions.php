@@ -237,7 +237,8 @@ function ds_get_unified_post_types_array(array $options = array()): array
         'case_count' => 15,
         'service_count' => -1,
         'orderby' => 'date',
-        'order' => 'DESC'
+        'order' => 'DESC',
+        'service_id' => null
     );
 
     $args = wp_parse_args($options['args'], $defaults);
@@ -247,6 +248,7 @@ function ds_get_unified_post_types_array(array $options = array()): array
     if (!$is_exclude_posts || !in_array('post', $options['exclude_posts'])) {
         $posts = get_posts(array(
             'post_type' => 'post',
+            'post_status' => 'publish',
             'posts_per_page' => $args['post_count'],
             'orderby' => $args['orderby'],
             'order' => $args['order']
@@ -266,12 +268,27 @@ function ds_get_unified_post_types_array(array $options = array()): array
     }
 
     if (!$is_exclude_posts || !in_array('case', $options['exclude_posts'])) {
-        $cases = get_posts(array(
+        // Get cases
+        $case_args = array(
             'post_type' => 'case',
+            'post_status' => 'publish',
             'posts_per_page' => $args['case_count'],
             'orderby' => $args['orderby'],
             'order' => $args['order']
-        ));
+        );
+
+        // If a service ID is provided, add a meta query to filter cases
+        if ($args['service_id']) {
+            $case_args['meta_query'] = array(
+                array(
+                    'key' => '_associated_service',
+                    'value' => $args['service_id'],
+                    'compare' => '='
+                )
+            );
+        }
+
+        $cases = get_posts($case_args);
 
         foreach ($cases as $case) {
 //        $associated_service = get_post_meta($case->ID, '_associated_service', true);
@@ -290,6 +307,7 @@ function ds_get_unified_post_types_array(array $options = array()): array
     if (!$is_exclude_posts || !in_array('service', $options['exclude_posts'])) {
         $services = get_posts(array(
             'post_type' => 'service',
+            'post_status' => 'publish',
             'posts_per_page' => $args['service_count'],
             'orderby' => $args['orderby'],
             'order' => $args['order']

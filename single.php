@@ -48,7 +48,8 @@ get_header();
                     ));
                 } elseif ($ds_is_single_service) {
                     $ds_unified_content = ds_get_unified_post_types_array(array(
-                        'exclude_posts' => array('post', 'service')
+                        'exclude_posts' => array('post', 'service'),
+                        'args' => array('service_id' => get_the_ID())
                     ));
                 } elseif ($ds_is_single_case) {
                     $ds_gallery_images = get_post_meta($post->ID, '_case_gallery_images', true) ?? array();
