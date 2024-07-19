@@ -59,8 +59,10 @@ get_header();
                 <?php
                 if (!empty($ds_unified_content) && count($ds_unified_content)) {
                     get_template_part('/template-parts/post-card', null, ['post' => $ds_unified_content[0]]);
-                } elseif ($ds_is_single_case && count($ds_gallery_images)) {
-                    get_template_part('/template-parts/post-gallery-item', null, ['img_id' => $ds_gallery_images[0]]);
+                } elseif ($ds_is_single_case) {
+                    if (is_array($ds_gallery_images) && count($ds_gallery_images)) {
+                        get_template_part('/template-parts/post-gallery-item', null, ['img_id' => $ds_gallery_images[0]]);
+                    }
                 }
                 ?>
 
