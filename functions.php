@@ -171,18 +171,37 @@ function ds_scripts() {
     wp_enqueue_style('main-style', get_template_directory_uri() . '/dist/css/style.min.css', [], DS_VERSION);
     wp_enqueue_style('fonts-style', get_template_directory_uri() . '/fonts/ds-fonts.css', [], DS_VERSION);
 
-    wp_enqueue_script(
-        'main-script',
-        get_template_directory_uri() . '/dist/js/app.min.js',
-        [
-            'jquery',
-            'masonry',
-            'imagesloaded'
-        ],
-        DS_VERSION,
-        true
-    );
-    wp_localize_script('main-script', 'options', $options);
+
+
+    if (is_archive()) {
+        wp_enqueue_script(
+            'archive-script',
+            get_template_directory_uri() . '/dist/js/archive.min.js',
+            [
+                'jquery',
+                'masonry',
+                'imagesloaded'
+            ],
+            DS_VERSION,
+            true
+        );
+
+        wp_localize_script('archive-script', 'options', $options);
+    } else {
+        wp_enqueue_script(
+            'main-script',
+            get_template_directory_uri() . '/dist/js/app.min.js',
+            [
+                'jquery',
+                'masonry',
+                'imagesloaded'
+            ],
+            DS_VERSION,
+            true
+        );
+
+        wp_localize_script('main-script', 'options', $options);
+    }
 }
 add_action( 'wp_enqueue_scripts', 'ds_scripts' );
 
@@ -365,4 +384,50 @@ function ds_get_unified_post_types_array(array $options = array()): array
     }
 
     return $result;
+}
+
+add_action('wp_ajax_ds_filter_cases_handler', 'ds_filter_cases_handler');
+add_action('wp_ajax_nopriv_ds_filter_cases_handler', 'ds_filter_cases_handler');
+
+function ds_filter_cases_handler(): void
+{
+    $service_id = isset($_POST['service_id']) ? sanitize_text_field($_POST['service_id']) : 'all';
+    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+
+    $args = array(
+        'post_type' => 'case',
+        'posts_per_page' => 20,
+        'paged' => $page,
+    );
+
+    if ($service_id !== 'all') {
+        $args['meta_query'] = array(
+            array(
+                'key' => '_associated_service',
+                'value' => $service_id,
+            ),
+        );
+    }
+
+    $cases_query = new WP_Query($args);
+    $cases = $cases_query->posts;
+
+    $response = array();
+
+    foreach ($cases as $case) {
+        $thumbnail_id = get_post_thumbnail_id($case->ID);
+        $thumbnail_url = $thumbnail_id ? wp_get_attachment_image_url($thumbnail_id, 'large') : '';
+
+        $response[] = array(
+            'title' => $case->post_title,
+            'id' => $case->ID,
+            'permalink' => get_permalink($case->ID),
+            'thumbnail_url' => $thumbnail_url,
+        );
+    }
+
+    wp_send_json(array(
+        'cases' => $response,
+        'has_more' => $cases_query->max_num_pages > $page,
+    ));
 }
