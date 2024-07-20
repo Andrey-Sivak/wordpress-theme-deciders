@@ -30,4 +30,7 @@ $ds_theme_settings = get_option('theme_settings');
     <a href="<?php echo get_home_url(); ?>" class="h-5">
         <img src="<?php echo $ds_home_icon_url; ?>" alt="<?php the_title() ?>" class="w-auto max-h-full">
     </a>
+    <a href="<?php echo get_home_url() . '/case/'; ?>" class="h-5">
+        <?php get_template_part('/vector-images/icon', 'cases-menu'); ?>
+    </a>
 </header>
