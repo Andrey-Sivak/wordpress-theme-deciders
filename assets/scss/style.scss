@@ -16,4 +16,23 @@ body.admin-bar {
   .site-header {
     top: 32px;
   }
+
+  .service-filter-container {
+
+    &.sticky {
+      top: 52px;
+    }
+  }
+}
+
+.service-item {
+  border-radius: 22px;
+
+  &.selected {
+    background-color: rgba(#fff, .14);
+    border: 1px solid rgba(#fff, .23);
+    order: 0!important;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
 }
