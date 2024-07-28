@@ -1,10 +1,7 @@
 <?php
 $ds_theme_settings = get_option('theme_settings');
-$ds_unified_content = ds_get_unified_post_types_array(array(
-    'exclude_posts' => array('post', 'service')
-));
 
-$cases = get_posts(array(
+$ds_cases = get_posts(array(
     'post_type' => 'case',
     'post_status' => 'publish',
     'posts_per_page' => -1,
@@ -32,10 +29,21 @@ get_header();
             <div class="layout-grid layout-3" id="cases-list">
                 <div class="grid-sizer"></div>
                 <?php
-                foreach ($ds_unified_content as $ds_unified_content_item) {
-                    get_template_part('/template-parts/post-card', null, ['post' => $ds_unified_content_item]);
-                }
-                ?>
+                foreach ($ds_cases as $ds_case) : ?>
+                    <a href="<?php echo get_permalink($ds_case->ID); ?>" class="masonry-item group text-white">
+                        <?php
+                        if (has_post_thumbnail($ds_case->ID)) {
+                            echo get_the_post_thumbnail(
+                                $ds_case->ID,
+                                'large',
+                                [
+                                    'class' => 'relative z-20'
+                                ]
+                            );
+                        }
+                        ?>
+                    </a>
+                <?php endforeach; ?>
             </div>
         </div>
     </main>
