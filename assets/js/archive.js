@@ -33,7 +33,7 @@ class CaseFilter {
 
         // document.getElementById('load-more-btn').addEventListener('click', this.handleLoadMore.bind(this));
 
-        window.addEventListener('scroll', this.handleScroll.bind(this));
+        // window.addEventListener('scroll', this.handleScroll.bind(this));
     }
 
     handleServiceItemClick(event) {
