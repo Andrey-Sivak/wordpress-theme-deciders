@@ -2,7 +2,12 @@
 $ds_theme_settings = get_option('theme_settings');
 ?>
 
-<div class="info-block-inner-block" style="padding-top: 13px;">
+<div class="info-block-inner-block relative" style="padding-top: 13px;">
+    <?php
+    if (is_front_page()) {
+        echo '<span class="w-4 h-4 block absolute z-30 rounded-full border-2 border-white bg-[#FF4D4F] -top-1.5 -left-1.5"></span>';
+    }
+    ?>
     <div class="w-full items-center justify-between flex mb-2.5 opacity-60">
         <span class="text-18 leading-1.2">На связи:</span>
         <span class="text-16 leading-1.2"><?php echo $ds_theme_settings['schedule']; ?></span>
