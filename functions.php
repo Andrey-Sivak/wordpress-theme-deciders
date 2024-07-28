@@ -280,8 +280,8 @@ function ds_get_unified_post_types_array(array $options = array()): array
                 'title' => $post->post_title,
                 'type' => 'post',
                 'permalink' => get_permalink($post->ID),
+                'excerpt' => get_the_excerpt($post),
 //            'date' => $post->post_date,
-//            'excerpt' => get_the_excerpt($post),
             );
         }
     }
@@ -316,9 +316,9 @@ function ds_get_unified_post_types_array(array $options = array()): array
                 'title' => $case->post_title,
                 'type' => 'case',
                 'permalink' => get_permalink($case->ID),
-//            'associated_service' => $associated_service ? get_the_title($associated_service) : '',
-//            'excerpt' => get_the_excerpt($case),
+                'excerpt' => get_the_excerpt($case),
 //            'date' => $case->post_date,
+//            'associated_service' => $associated_service ? get_the_title($associated_service) : '',
             );
         }
     }
