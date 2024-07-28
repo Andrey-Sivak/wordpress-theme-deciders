@@ -28,13 +28,13 @@ $ds_theme_settings = get_option('theme_settings');
         <a href="#" class="grow bg-[#5E6AE1] py-2 px-5 rounded-[8px] text-center">Перезвонить
             мне</a>
     </div>
-    <a href="mailto:<?php echo $ds_theme_settings['email']; ?>" class="block mb-2.5">
-        <!--TODO: fix -->
-        <?php echo $ds_theme_settings['email']; ?>
+    <a href="mailto:<?php echo $ds_theme_settings['email']; ?>" class="flex items-center gap-2 mb-2.5 opacity-60 hover:opacity-100 transition-all duration-300">
+        <?php get_template_part('/vector-images/icon', 'email'); ?>
+        <span class="text-20 leading-1.2"><?php echo $ds_theme_settings['email']; ?></span>
     </a>
 
     <?php if ($ds_theme_settings['short_text']) : ?>
-        <p class="text-[17px] leading-[22px]">
+        <p class="text-[17px] leading-[22px] opacity-30">
             <?php echo $ds_theme_settings['short_text']; ?>
         </p>
     <?php endif; ?>
