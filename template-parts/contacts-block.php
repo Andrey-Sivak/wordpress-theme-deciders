@@ -2,10 +2,10 @@
 $ds_theme_settings = get_option('theme_settings');
 ?>
 
-<div class="info-block-inner-block">
-    <div class="w-full items-center justify-between flex mb-2.5">
-        <span class="text-20 leading-1.2">На связи:</span>
-        <span class="text-20 leading-1.2"><?php echo $ds_theme_settings['schedule']; ?></span>
+<div class="info-block-inner-block" style="padding-top: 13px;">
+    <div class="w-full items-center justify-between flex mb-2.5 opacity-60">
+        <span class="text-18 leading-1.2">На связи:</span>
+        <span class="text-16 leading-1.2"><?php echo $ds_theme_settings['schedule']; ?></span>
     </div>
     <a href="tel:<?php echo $ds_theme_settings['phone']; ?>"
        class="mb-2.5 flex items-center gap-x-3 group">
@@ -13,7 +13,7 @@ $ds_theme_settings = get_option('theme_settings');
         <span class="text-28 leading-[34px] group-hover:underline"><?php echo $ds_theme_settings['phone']; ?></span>
     </a>
 
-    <span class="text-20 leading-1.2 block mb-2.5">Другие способы:</span>
+    <span class="text-18 leading-1.2 block mb-2.5 opacity-60">Другие способы:</span>
     <div class="flex items-center justify-between gap-x-5 mb-2.5">
         <?php
         if (!empty($ds_theme_settings['social_links'])) {

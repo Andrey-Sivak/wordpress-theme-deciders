@@ -11,7 +11,7 @@ $ds_services = get_posts($args);
 if (!empty($ds_services)) :
     ?>
     <div class="info-block-inner-block">
-        <p class="text-20 leading-1.2 mb-2.5">Наши услуги:</p>
+        <p class="text-20 leading-1.2 mb-2.5 opacity-60">Наши услуги:</p>
         <ul class="flex gap-x-6 gap-y-3.5 flex-wrap">
             <?php foreach ($ds_services as $ds_service) :
                 $ds_icon_id = get_post_meta($ds_service->ID, '_service_icon_id', true);
