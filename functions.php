@@ -396,7 +396,8 @@ function ds_filter_cases_handler(): void
 
     $args = array(
         'post_type' => 'case',
-        'posts_per_page' => 20,
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
         'paged' => $page,
     );
 
