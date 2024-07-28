@@ -7,7 +7,7 @@ $ds_unified_content = ds_get_unified_post_types_array(array(
 $cases = get_posts(array(
     'post_type' => 'case',
     'post_status' => 'publish',
-    'posts_per_page' => 20,
+    'posts_per_page' => -1,
 ));
 
 get_header();

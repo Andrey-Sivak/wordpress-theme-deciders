@@ -252,8 +252,8 @@ function ds_get_unified_post_types_array(array $options = array()): array
 {
     $is_exclude_posts = isset($options['exclude_posts']);
     $defaults = array(
-        'post_count' => 15,
-        'case_count' => 15,
+        'post_count' => -1,
+        'case_count' => -1,
         'service_count' => -1,
         'orderby' => 'date',
         'order' => 'DESC',
