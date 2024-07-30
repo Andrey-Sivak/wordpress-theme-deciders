@@ -84,16 +84,6 @@ get_header();
             line-height: 22px;
         }
 
-        .info-block-inner-block-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, .25);
-            padding: 8px 0;
-            font-size: 15px;
-            line-height: 20px;
-        }
-
         .info-block-inner-block-title {
             margin-bottom: 10px;
             font-size: 20px;

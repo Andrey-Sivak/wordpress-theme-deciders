@@ -1,0 +1,52 @@
+.ds-fill-button {
+  @apply py-2
+  px-5
+  rounded-[8px]
+  text-center
+  relative
+  overflow-hidden;
+
+  & span {
+    @apply relative
+    whitespace-nowrap
+    z-20;
+  }
+
+  &:before {
+    z-index: 10;
+    width: 200%;
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transition: all ease .3s;
+    background: linear-gradient(to right,
+            rgba(94, 106, 225, 1) 0%,
+            rgba(94, 106, 225, 1) 50%,
+            rgba(94, 106, 225, 0.62) 100%
+    );
+    transform: translateX(-50%);
+  }
+
+  &:hover:before {
+    transform: translateX(0);
+  }
+}
+
+.info-block-inner-block-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, .25);
+  padding: 8px 0;
+  font-size: 15px;
+  line-height: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    border-color: rgba(94, 106, 225, 1);
+  }
+}

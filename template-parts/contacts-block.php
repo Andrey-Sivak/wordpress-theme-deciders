@@ -29,9 +29,9 @@ $ds_theme_settings = get_option('theme_settings');
             }
         }
         ?>
-        <!--TODO: fix gradient-->
-        <a href="#" class="grow bg-[#5E6AE1] py-2 px-5 rounded-[8px] text-center">Перезвонить
-            мне</a>
+        <a href="#" class="grow ds-fill-button">
+            <span>Перезвонить мне</span>
+        </a>
     </div>
     <a href="mailto:<?php echo $ds_theme_settings['email']; ?>" class="flex items-center gap-2 mb-2.5 opacity-60 hover:opacity-100 transition-all duration-300">
         <?php get_template_part('/vector-images/icon', 'email'); ?>
