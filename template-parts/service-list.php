@@ -12,7 +12,7 @@ if (!empty($ds_services)) :
     ?>
     <div class="info-block-inner-block">
         <p class="text-20 leading-1.2 mb-2.5 opacity-60">Наши услуги:</p>
-        <ul class="flex gap-x-6 gap-y-3.5 flex-wrap">
+        <ul class="flex lg:gap-x-6 gap-x-3 lg:gap-y-3.5 gap-y-2 flex-wrap">
             <?php foreach ($ds_services as $ds_service) :
                 $ds_icon_id = get_post_meta($ds_service->ID, '_service_icon_id', true);
                 $ds_icon_html = $ds_icon_id ? wp_get_attachment_image($ds_icon_id, 'thumbnail', false, array('class' => 'service-icon')) : '';

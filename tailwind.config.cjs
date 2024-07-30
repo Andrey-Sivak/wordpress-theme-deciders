@@ -35,7 +35,7 @@ module.exports = {
             boxShadow: {},
             maxWidth: {},
             screens: {
-                hg: '1919px',
+                hg: '1900px',
                 '1.5xl': '1440px',
             },
             gridTemplateColumns: {},

@@ -9,7 +9,14 @@
   &.layout-4 {
     & .grid-sizer,
     & .masonry-item {
-      width: calc((100% - 66px) / 4);
+      width: calc((100% - 44px) / 3);
+    }
+
+    @media(min-width: 1280px) {
+      & .grid-sizer,
+      & .masonry-item {
+        width: calc((100% - 66px) / 4);
+      }
     }
   }
 

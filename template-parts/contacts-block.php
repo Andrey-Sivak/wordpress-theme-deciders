@@ -15,21 +15,21 @@ $ds_theme_settings = get_option('theme_settings');
     <a href="tel:<?php echo $ds_theme_settings['phone']; ?>"
        class="mb-2.5 flex items-center gap-x-3 group">
         <?php get_template_part('/vector-images/icon', 'phone') ?>
-        <span class="text-28 leading-[34px] group-hover:underline"><?php echo $ds_theme_settings['phone']; ?></span>
+        <span class="1.5xl:text-28 xl:text-22 lg:text-24 text-18 1.5xl.leading-[34px] leading-1.2 group-hover:underline"><?php echo $ds_theme_settings['phone']; ?></span>
     </a>
 
     <span class="text-18 leading-1.2 block mb-2.5 opacity-60">Другие способы:</span>
-    <div class="flex items-center justify-between gap-x-5 mb-2.5">
+    <div class="flex items-center 1.5xl:justify-between justify-start hg:gap-x-5 1.5xl:gap-x-2 gap-x-5 gap-y-5 mb-2.5 1.5xl:flex-nowrap flex-wrap">
         <?php
         if (!empty($ds_theme_settings['social_links'])) {
             foreach ($ds_theme_settings['social_links'] as $link) {
                 if (!empty($link['url']) && !empty($link['icon'])) {
-                    echo '<a href="' . esc_url($link['url']) . '" target="_blank" class="w-8"><img src="' . esc_attr($link['icon']) . '" /></a>';
+                    echo '<a href="' . esc_url($link['url']) . '" target="_blank" class="hg:w-8 1.5xl:w-6 w-8"><img src="' . esc_attr($link['icon']) . '" /></a>';
                 }
             }
         }
         ?>
-        <a href="#" class="grow ds-fill-button">
+        <a href="#" class="grow ds-fill-button 1.5xl:w-auto w-full">
             <span>Перезвонить мне</span>
         </a>
     </div>

@@ -32,7 +32,7 @@ get_header();
 
                 <!-- Second info block (3 col) -->
                 <div class="masonry-item info-block info-block-2">
-                    <p class="text-50 mb-13.5 leading-[59px]">
+                    <p class="2xl:text-50 1.5xl:text-40 text-32 mb-13.5 2xl:leading-[59px] leading-1.2">
                         <?php echo get_bloginfo('description'); ?>
                     </p>
                     <?php get_template_part('/template-parts/contacts-block'); ?>
@@ -60,51 +60,5 @@ get_header();
         </div>
 
     </main>
-    <style>
-        /* Styles for info blocks */
-        .info-block {
-            padding-top: 90px;
-        }
-
-        .info-block-inner-block:not(:last-of-type) {
-            margin-bottom: 12px;
-        }
-
-        .info-block-inner-block-heading {
-            margin-bottom: 18px;
-            font-weight: bold;
-            font-size: 22px;
-            line-height: 28px;
-            /*letter-spacing: 0.4px;*/
-        }
-
-        .info-block-inner-block-text {
-            margin-bottom: 7px;
-            font-size: 17px;
-            line-height: 22px;
-        }
-
-        .info-block-inner-block-title {
-            margin-bottom: 10px;
-            font-size: 20px;
-            line-height: 25px;
-        }
-
-        .info-block-inner-block-categories {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            column-gap: 22px;
-            row-gap: 8px;
-        }
-
-        .info-block-inner-block-category {
-            display: flex;
-            align-items: center;
-            padding: 6px 0;
-            cursor: pointer;
-            column-gap: 8px;
-        }
-    </style>
 <?php
 get_footer();
