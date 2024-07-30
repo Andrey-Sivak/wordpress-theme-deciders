@@ -34,7 +34,16 @@ function watcher() {
 
 export { svgSprive };
 
-const mainTasks = gulp.parallel(copy, fonts, jsLibs, jsUnits, scss, js, images, cssVendor);
+const mainTasks = gulp.parallel(
+	copy,
+	fonts,
+	jsLibs,
+	jsUnits,
+	scss,
+	js,
+	images,
+	cssVendor,
+);
 
 const dev = gulp.series(reset, mainTasks, gulp.parallel(watcher));
 const build = gulp.series(reset, mainTasks);

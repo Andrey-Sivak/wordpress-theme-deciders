@@ -30,7 +30,7 @@ get_header();
                 <div class="grid-sizer"></div>
                 <?php
                 foreach ($ds_cases as $ds_case) : ?>
-                    <a href="<?php echo get_permalink($ds_case->ID); ?>" class="masonry-item group text-white">
+                    <a href="<?php echo get_permalink($ds_case->ID); ?>" class="masonry-item group text-white ds-post">
                         <?php
                         if (has_post_thumbnail($ds_case->ID)) {
                             echo get_the_post_thumbnail(

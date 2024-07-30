@@ -2,7 +2,7 @@
 $ds_post_data = $args['post'];
 ?>
 
-<a href="<?php echo $ds_post_data['permalink']; ?>" class="masonry-item group text-white">
+<a href="<?php echo $ds_post_data['permalink']; ?>" class="masonry-item group text-white ds-post">
     <span class="overflow-hidden rounded-[16px] block relative">
         <?php
         if (has_post_thumbnail($ds_post_data['id'])) {

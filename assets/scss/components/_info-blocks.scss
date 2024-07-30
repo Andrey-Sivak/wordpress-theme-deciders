@@ -1,9 +1,9 @@
 .info-block {
-  padding-top: 90px;
+  padding-top: 20px;
 
-  //@media(min-width: 1440px) {
-  //  padding-top: 90px;
-  //}
+  @media(min-width: 767px) {
+    padding-top: 90px;
+  }
 
   &-inner-block {
 
