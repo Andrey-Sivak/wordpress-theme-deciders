@@ -38,124 +38,28 @@ jQuery(document).ready(function ($) {
 		return;
 	}
 
-	const $window = $(window);
-	const $container = $('.layout-grid.layout-4');
-	const $posts = $('.ds-post');
-	const $infoBlocks = $('.info-block-1, .info-block-2');
-	let currentPostIndex = 0;
-	let isFullscreenMode = false;
+	const infoBlocks = document.querySelectorAll('.info-block');
+	const posts = document.querySelectorAll('.ds-post');
+	let isFullscreen = false;
 
-	function initMobileView() {
-		if (window.matchMedia('(max-width: 767px)').matches) {
-			setupMobileScrolling();
-		} else {
-			resetToDesktopView();
-		}
+	function checkFullscreenMode() {
+		const scrollPosition = window.scrollY;
+
+		const secondInfoBlockPosition =
+			infoBlocks[1].getBoundingClientRect().bottom + window.scrollY;
+
+		// if (scrollPosition > secondInfoBlockPosition && !isFullscreen) {
+		// 	document.body.classList.add('fullscreen-mode');
+		// 	posts.forEach((post) => post.classList.add('fullscreen'));
+		// 	isFullscreen = true;
+		// } else if (scrollPosition <= secondInfoBlockPosition && isFullscreen) {
+		// 	document.body.classList.remove('fullscreen-mode');
+		// 	posts.forEach((post) => post.classList.remove('fullscreen'));
+		// 	isFullscreen = false;
+		// }
 	}
 
-	function setupMobileScrolling() {
-		$window.on('scroll', handlePageScroll);
-		$container.on('scroll', debounce(handlePostScroll, 50));
-		$posts.on('touchstart', handleTouchStart);
-		$posts.on('touchmove', handleTouchMove);
-	}
-
-	function resetToDesktopView() {
-		$window.off('scroll');
-		$container.off('scroll');
-		$posts.off('touchstart touchmove');
-		$container.removeClass('fullscreen-mode');
-		isFullscreenMode = false;
-	}
-
-	function handlePageScroll() {
-		if (isFullscreenMode) return;
-
-		const infoBlocksHeight = $infoBlocks
-			.toArray()
-			.reduce((total, el) => total + $(el).outerHeight(), 0);
-		const firstPostTop = $posts.first().offset().top;
-		const scrollTop = $window.scrollTop();
-		const windowHeight = $window.height();
-
-		if (scrollTop + windowHeight > firstPostTop + windowHeight / 2) {
-			enterFullscreenMode();
-		}
-	}
-
-	function enterFullscreenMode() {
-		isFullscreenMode = true;
-		$container.addClass('fullscreen-mode');
-		$('html, body').animate(
-			{ scrollTop: $posts.first().offset().top },
-			300,
-		);
-		setTimeout(() => {
-			$window.off('scroll');
-			currentPostIndex = 0;
-			scrollToPost(currentPostIndex);
-		}, 300);
-	}
-
-	function handlePostScroll() {
-		if (!isFullscreenMode) return;
-		const scrollTop = $container.scrollTop();
-		currentPostIndex = Math.round(scrollTop / window.innerHeight);
-		// You can add additional logic here, like updating URL or analytics
-	}
-
-	let touchStartY = 0;
-
-	function handleTouchStart(e) {
-		if (!isFullscreenMode) return;
-		touchStartY = e.originalEvent.touches[0].clientY;
-	}
-
-	function handleTouchMove(e) {
-		if (!isFullscreenMode) return;
-		const touchEndY = e.originalEvent.touches[0].clientY;
-		const diff = touchStartY - touchEndY;
-
-		if (Math.abs(diff) > 50) {
-			// Minimum swipe distance
-			if (diff > 0 && currentPostIndex < $posts.length - 1) {
-				// Swipe up, go to next post
-				scrollToPost(currentPostIndex + 1);
-			} else if (diff < 0 && currentPostIndex > 0) {
-				// Swipe down, go to previous post
-				scrollToPost(currentPostIndex - 1);
-			}
-			e.preventDefault();
-		}
-	}
-
-	function scrollToPost(index) {
-		const $targetPost = $posts.eq(index);
-		const scrollTo =
-			$targetPost.offset().top -
-			$container.offset().top +
-			$container.scrollTop();
-		$container.animate(
-			{
-				scrollTop: scrollTo,
-			},
-			300,
-		);
-		currentPostIndex = index;
-	}
-
-	// Debounce function to limit scroll event firing
-	function debounce(func, wait) {
-		let timeout;
-		return function () {
-			const context = this,
-				args = arguments;
-			clearTimeout(timeout);
-			timeout = setTimeout(() => func.apply(context, args), wait);
-		};
-	}
-
-	// Initialize
-	initMobileView();
-	$window.on('resize', initMobileView);
+	// window.addEventListener('scroll', checkFullscreenMode);
+	// window.addEventListener('resize', checkFullscreenMode);
+	// checkFullscreenMode();
 });
