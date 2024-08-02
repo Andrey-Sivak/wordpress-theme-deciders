@@ -21,7 +21,7 @@ $ds_theme_settings = get_option('theme_settings');
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class( 'bg-deciders-dark lg:px-7.5 px-5 font-sf-pro text-white 1.5xl:pt-22 pt-10 relative overflow-x-hidden' ); ?>>
+<body <?php body_class( 'bg-deciders-dark lg:px-7.5 px-5 font-sf-pro text-white 1.5xl:pt-22 pt-10 relative' ); ?>>
 <?php wp_body_open(); ?>
 <header class="site-header bg-[#e7e7e7] fixed z-20 top-0 left-1/2 -translate-x-1/2 rounded-b-[40px] pt-2.5 pb-2 px-13.5 flex items-center gap-x-9.5">
     <?php
@@ -35,30 +35,32 @@ $ds_theme_settings = get_option('theme_settings');
     </a>
 </header>
 
-<?php
-if (is_front_page() || is_archive()) {
-    get_template_part(
-        '/vector-images/bg-decor',
-        'primary-top',
-        array(
-            'class' => 'block absolute z-0 left-1/2 -translate-x-1/2 w-full top-0'
-        )
-    );
+<div class="absolute z-0 inset-0 overflow-hidden">
+    <?php
+    if (is_front_page() || is_archive()) {
+        get_template_part(
+            '/vector-images/bg-decor',
+            'primary-top',
+            array(
+                'class' => 'block absolute z-0 left-1/2 -translate-x-1/2 w-full top-0'
+            )
+        );
 
-    get_template_part(
-        '/vector-images/bg-decor',
-        'primary-center',
-        array(
-            'class' => 'block absolute z-0 left-1/2 -translate-x-1/2 w-full top-[80vw] -rotate-[169deg]'
-        )
-    );
-} else {
-    get_template_part(
-        '/vector-images/bg-decor',
-        'primary-top',
-        array(
-            'class' => 'block absolute z-0 left-1/2 -translate-x-1/2 w-full top-0 -rotate-[169deg]'
-        )
-    );
-}
-?>
+        get_template_part(
+            '/vector-images/bg-decor',
+            'primary-center',
+            array(
+                'class' => 'block absolute z-0 left-1/2 -translate-x-1/2 w-full top-[80vw] -rotate-[169deg]'
+            )
+        );
+    } else {
+        get_template_part(
+            '/vector-images/bg-decor',
+            'primary-top',
+            array(
+                'class' => 'block absolute z-0 left-1/2 -translate-x-1/2 w-full top-0 -rotate-[169deg]'
+            )
+        );
+    }
+    ?>
+</div>
