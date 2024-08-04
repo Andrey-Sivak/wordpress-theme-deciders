@@ -432,3 +432,5 @@ function ds_filter_cases_handler(): void
         'has_more' => $cases_query->max_num_pages > $page,
     ));
 }
+
+require get_template_directory() . '/inc/ds-patterns.php';
