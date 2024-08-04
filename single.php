@@ -5,8 +5,8 @@ $ds_current_post_type = $post->post_type;
 get_header();
 ?>
 
-    <main class="grid grid-cols-2 gap-x-6 items-start relative z-10">
-        <div class="bg-white rounded-[20px] py-15 px-20 text-black">
+    <main class="grid xl:grid-cols-2 lg:grid-cols-[3fr_2fr] gap-x-6 gap-y-10 items-start relative z-10">
+        <div class="bg-white rounded-[20px] xl:py-15 md:py-10 py-7.5 xl:px-20 md:px-10 px-3 text-black">
             <header class="flex items-center mb-7 gap-x-3">
                 <?php
                 $ds_single_icon_id = get_post_meta(get_the_ID(), '_service_icon_id', true);
@@ -18,11 +18,15 @@ get_header();
 
                 if ($ds_single_icon_url) : ?>
                     <figure>
-                        <img src="<?php echo $ds_single_icon_url; ?>" alt="<?php the_title() ?>">
+                        <img
+                                src="<?php echo $ds_single_icon_url; ?>"
+                                class="w-auto md:h-auto h-6"
+                                alt="<?php the_title() ?>"
+                        >
                     </figure>
                 <?php endif; ?>
 
-                <h1 class="text-34 leading-[40px] font-bold">
+                <h1 class="xl:text-34 md:text-28 text-24 xl:leading-[40px] leading-1.2 font-bold">
                     <?php the_title(); ?>
                 </h1>
             </header>
@@ -33,7 +37,7 @@ get_header();
         </div>
 
         <div class="">
-            <div class="layout-grid layout-2">
+            <div class="layout-grid layout-2 grid gap-5.5">
                 <div class="grid-sizer"></div>
                 <?php
                 $ds_unified_content = null;
@@ -66,7 +70,6 @@ get_header();
                 }
                 ?>
 
-                <!-- Info block (2 col) -->
                 <div class="masonry-item info-block info-block-1">
                     <?php
                     get_template_part('/template-parts/big-logo', null, array(
@@ -76,7 +79,6 @@ get_header();
                     get_template_part('template-parts/service-list');
                     ?>
                 </div>
-                <!-- End Info block (2 col) -->
 
                 <?php
                 if (!empty($ds_unified_content) && count($ds_unified_content) > 1) {

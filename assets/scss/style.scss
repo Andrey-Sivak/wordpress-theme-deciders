@@ -39,3 +39,32 @@ body.admin-bar {
     padding-right: 14px;
   }
 }
+
+body {
+
+  &.home {
+    padding-top: 40px;
+  }
+
+  &.single {
+    padding-top: 80px;
+
+    .info-block {
+      padding-top: 20px;
+      padding-bottom: 26px;
+
+      @media(min-width: 1024px) {
+        padding-bottom: 0;
+      }
+
+      @media(min-width: 1280px) {
+        padding-bottom: 26px;
+        padding-top: 90px;
+      }
+    }
+  }
+
+  @media(min-width: 1440px) {
+    padding-top: 88px;
+  }
+}

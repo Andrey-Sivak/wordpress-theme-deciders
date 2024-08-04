@@ -34,9 +34,86 @@
   }
 
   &.layout-2 {
+
+    .masonry-item {
+      order: 2;
+    }
+
+    .grid-sizer + .masonry-item {
+      order: 1;
+    }
+
+    .info-block-1 {
+      order: 0;
+    }
+
+    & .grid-sizer {
+      display: none;
+    }
+
     & .grid-sizer,
     & .masonry-item {
-      width: calc((100% - 22px) / 2);
+      width: 100%;
+    }
+
+    & .ds-post,
+    & .masonry-item {
+      padding-bottom: 0;
+    }
+
+    @media(min-width: 767px) {
+      & .grid-sizer {
+        display: block;
+      }
+
+      & .grid-sizer,
+      & .masonry-item {
+        width: calc((100% - 22px) / 2);
+      }
+
+      .masonry-item,
+      .grid-sizer + .masonry-item,
+      .info-block-1 {
+        order: unset;
+      }
+    }
+
+    @media(min-width: 1024px) {
+      & .grid-sizer {
+        display: none;
+      }
+
+      & .grid-sizer,
+      & .masonry-item {
+        width: 100%;
+      }
+
+      & .ds-post,
+      & .masonry-item {
+        padding-bottom: 0;
+      }
+    }
+
+    @media(min-width: 1280px) {
+      & .ds-post,
+      & .masonry-item {
+        padding-bottom: 26px;
+      }
+
+      & .grid-sizer {
+        display: block;
+      }
+
+      & .grid-sizer,
+      & .masonry-item {
+        width: calc((100% - 22px) / 2);
+      }
+
+      .masonry-item,
+      .grid-sizer + .masonry-item,
+      .info-block-1 {
+        order: unset;
+      }
     }
   }
 

@@ -1,5 +1,14 @@
 jQuery(document).ready(function ($) {
-	if (window.matchMedia('(min-width: 767px)').matches) {
+	const setupGrid =
+		(window.matchMedia('(min-width: 767px)').matches &&
+			document.body.classList.contains('home')) ||
+		(document.body.classList.contains('single') &&
+			(window.matchMedia('(min-width: 1280px)').matches ||
+				window.matchMedia('(max-width: 1024px)').matches) &&
+			window.matchMedia('(min-width: 767px)').matches);
+
+	if (setupGrid) {
+		console.log(123123);
 		const grid = document.querySelector('.layout-grid');
 		const items = grid.querySelectorAll('.masonry-item');
 
