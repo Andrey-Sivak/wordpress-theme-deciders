@@ -8,7 +8,6 @@ jQuery(document).ready(function ($) {
 			window.matchMedia('(min-width: 767px)').matches);
 
 	if (setupGrid) {
-		console.log(123123);
 		const grid = document.querySelector('.layout-grid');
 		const items = grid.querySelectorAll('.masonry-item');
 
