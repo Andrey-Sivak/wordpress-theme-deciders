@@ -7,7 +7,7 @@ get_header();
 
     <main class="grid xl:grid-cols-2 lg:grid-cols-[3fr_2fr] gap-x-6 gap-y-10 items-start relative z-10">
         <div class="bg-white rounded-[20px] xl:py-15 md:py-10 py-7.5 xl:px-20 md:px-10 px-3 text-black">
-            <header class="flex items-center mb-7 gap-x-3">
+            <header class="flex items-start mb-7 md:gap-x-3 gap-x-2">
                 <?php
                 $ds_single_icon_id = get_post_meta(get_the_ID(), '_service_icon_id', true);
                 $ds_single_icon_url = wp_get_attachment_image_url($ds_single_icon_id, 'thumbnail') ?? '';
@@ -17,7 +17,7 @@ get_header();
                 }
 
                 if ($ds_single_icon_url) : ?>
-                    <figure>
+                    <figure class="shrink-0 pt-0.5">
                         <img
                                 src="<?php echo $ds_single_icon_url; ?>"
                                 class="w-auto md:h-auto h-6"
