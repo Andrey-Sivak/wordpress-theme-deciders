@@ -10,7 +10,7 @@ $ds_cases = get_posts(array(
 get_header();
 ?>
 
-    <main class="grid grid-cols-[1fr_3fr] gap-x-6 relative z-10">
+    <main class="grid xl:grid-cols-[1fr_3fr] lg:grid-cols-[1fr_2fr] md:grid-cols-[1.5fr_2fr] gap-x-6 gap-y-6 relative z-10">
         <div class="relative">
             <?php
             get_template_part('/template-parts/big-logo', null, array(

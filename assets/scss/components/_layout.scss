@@ -29,7 +29,21 @@
   &.layout-3 {
     & .grid-sizer,
     & .masonry-item {
-      width: calc((100% - 44px) / 3);
+      width: 100%;
+    }
+
+    @media(min-width: 767px) {
+      & .grid-sizer,
+      & .masonry-item {
+        width: calc((100% - 22px) / 2);
+      }
+    }
+
+    @media(min-width: 1024px) {
+      & .grid-sizer,
+      & .masonry-item {
+        width: calc((100% - 44px) / 3);
+      }
     }
   }
 
