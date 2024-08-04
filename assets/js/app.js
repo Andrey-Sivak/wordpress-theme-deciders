@@ -46,28 +46,232 @@ jQuery(document).ready(function ($) {
 		return;
 	}
 
-	const infoBlocks = document.querySelectorAll('.info-block');
+	// TODO: temporarily for home page only.
+	if (!document.body.classList.contains('home')) return;
+
 	const posts = document.querySelectorAll('.ds-post');
-	let isFullscreen = false;
+	const pnls = posts.length;
+	let scdir,
+		hold = false;
+	const well = document.querySelector('.layout-grid');
+	const infoBlock2 = document.querySelector('.info-block-2');
+	const firstPost = document.querySelector('.ds-post');
+	let isFullscreenMode = false;
 
-	function checkFullscreenMode() {
-		const scrollPosition = window.scrollY;
-
-		const secondInfoBlockPosition =
-			infoBlocks[1].getBoundingClientRect().bottom + window.scrollY;
-
-		// if (scrollPosition > secondInfoBlockPosition && !isFullscreen) {
-		// 	document.body.classList.add('fullscreen-mode');
-		// 	posts.forEach((post) => post.classList.add('fullscreen'));
-		// 	isFullscreen = true;
-		// } else if (scrollPosition <= secondInfoBlockPosition && isFullscreen) {
-		// 	document.body.classList.remove('fullscreen-mode');
-		// 	posts.forEach((post) => post.classList.remove('fullscreen'));
-		// 	isFullscreen = false;
-		// }
+	function _scrollY(obj) {
+		var slength,
+			plength,
+			pan,
+			step = 100,
+			vh = window.innerHeight / 100,
+			vmin = Math.min(window.innerHeight, window.innerWidth) / 100;
+		if (
+			(this !== undefined && this.id === 'well') ||
+			(obj !== undefined && obj.id === 'well')
+		) {
+			pan = this || obj;
+			plength = parseInt(pan.offsetHeight / vh);
+		}
+		if (pan === undefined) {
+			return;
+		}
+		plength = plength || parseInt(pan.offsetHeight / vmin);
+		slength = parseInt(pan.style.transform.replace('translateY(', ''));
+		if (scdir === 'up' && Math.abs(slength) < plength - plength / pnls) {
+			slength = slength - step;
+		} else if (scdir === 'down' && slength < 0) {
+			//  TODO: test
+			// if (isElementInViewport(posts[0])) {
+			// 	console.log(999999);
+			// 	disableFullscreenMode();
+			// 	return;
+			// } else {
+			// 	slength = slength + step;
+			// }
+			//  TODO: end test
+			slength = slength + step;
+		} else if (scdir === 'top') {
+			slength = 0;
+		}
+		if (hold === false) {
+			hold = true;
+			pan.style.transform = 'translateY(' + slength + 'vh)';
+			setTimeout(function () {
+				hold = false;
+			}, 1000);
+		}
+		console.log(
+			scdir +
+				':' +
+				slength +
+				':' +
+				plength +
+				':' +
+				(plength - plength / pnls),
+		);
 	}
 
-	// window.addEventListener('scroll', checkFullscreenMode);
-	// window.addEventListener('resize', checkFullscreenMode);
-	// checkFullscreenMode();
+	function _swipe(obj) {
+		console.log('_swipe');
+		var swdir,
+			sX,
+			sY,
+			dX,
+			dY,
+			threshold = 100,
+			slack = 50,
+			alT = 500,
+			elT,
+			stT;
+
+		obj.addEventListener(
+			'touchstart',
+			function (e) {
+				var tchs = e.changedTouches[0];
+				swdir = 'none';
+				sX = tchs.pageX;
+				sY = tchs.pageY;
+				stT = new Date().getTime();
+			},
+			false,
+		);
+
+		obj.addEventListener(
+			'touchmove',
+			function (e) {
+				if (isFullscreenMode) {
+					e.preventDefault();
+				}
+			},
+			false,
+		);
+
+		obj.addEventListener(
+			'touchend',
+			function (e) {
+				var tchs = e.changedTouches[0];
+				dX = tchs.pageX - sX;
+				dY = tchs.pageY - sY;
+				elT = new Date().getTime() - stT;
+				if (elT <= alT) {
+					if (Math.abs(dX) >= threshold && Math.abs(dY) <= slack) {
+						swdir = dX < 0 ? 'left' : 'right';
+					} else if (
+						Math.abs(dY) >= threshold &&
+						Math.abs(dX) <= slack
+					) {
+						swdir = dY < 0 ? 'up' : 'down';
+					}
+
+					if (obj.id === 'well') {
+						if (swdir === 'up') {
+							scdir = swdir;
+							_scrollY(obj);
+						} else if (
+							swdir === 'down' &&
+							obj.style.transform !== 'translateY(0)'
+						) {
+							scdir = swdir;
+							_scrollY(obj);
+							//  TODO: test
+							// if (isElementInViewport(posts[0])) {
+							// 	console.log(999999);
+							// 	disableFullscreenMode();
+							// 	return;
+							// } else {
+							// 	scdir = swdir;
+							// 	_scrollY(obj);
+							// }
+							//  TODO: end test
+						}
+						e.stopPropagation();
+					}
+				}
+			},
+			false,
+		);
+	}
+
+	function isElementInViewport(el) {
+		const rect = el.getBoundingClientRect();
+
+		return (
+			rect.top <
+				(window.innerHeight || document.documentElement.clientHeight) &&
+			rect.bottom > 0 &&
+			rect.left <
+				(window.innerWidth || document.documentElement.clientWidth) &&
+			rect.right > 0
+		);
+	}
+
+	function handleScroll() {
+		const wellRect = well.getBoundingClientRect();
+		const infoBlock2Rect = infoBlock2.getBoundingClientRect();
+
+		if (
+			isElementInViewport(firstPost) &&
+			infoBlock2Rect.bottom <= 0 &&
+			!isFullscreenMode
+		) {
+			enableFullscreenMode();
+		} else if (infoBlock2Rect.bottom > 0 && isFullscreenMode) {
+			disableFullscreenMode();
+		}
+	}
+
+	function enableFullscreenMode() {
+		infoBlock2.style.marginBottom = 'calc(110vh)';
+		isFullscreenMode = true;
+		well.style.position = 'fixed';
+		well.style.top = '0';
+		well.style.left = '0';
+		well.style.width = '100%';
+		well.style.overflow = 'hidden';
+		well.style.background = '#000';
+		well.style.zIndex = 100000;
+		document.body.style.overflow = 'hidden';
+	}
+
+	function disableFullscreenMode() {
+		infoBlock2.style.marginBottom = 0;
+		isFullscreenMode = false;
+		well.style.position = '';
+		well.style.top = '';
+		well.style.left = '';
+		well.style.width = '';
+		well.style.overflow = '';
+		document.body.style.overflow = '';
+		well.style.background = 'transparent';
+		well.style.zIndex = 'unset';
+		well.style.transform = 'translateY(0)';
+	}
+
+	well.style.transform = 'translateY(0)';
+
+	well.addEventListener('wheel', function (e) {
+		if (isFullscreenMode) {
+			e.preventDefault();
+			if (e.deltaY < 0) {
+				scdir = 'down';
+			}
+			if (e.deltaY > 0) {
+				scdir = 'up';
+			}
+			_scrollY(well);
+		}
+	});
+
+	_swipe(well);
+
+	window.addEventListener('scroll', handleScroll);
+	window.addEventListener('resize', handleScroll);
+
+	var tops = document.querySelectorAll('.ds-post');
+	for (var i = 0; i < tops.length; i++) {
+		tops[i].addEventListener('click', function () {
+			scdir = 'top';
+			_scrollY(well);
+		});
+	}
 });
