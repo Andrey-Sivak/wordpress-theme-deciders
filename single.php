@@ -31,7 +31,7 @@ get_header();
                 </h1>
             </header>
 
-            <div class="">
+            <div class="ds-post-content">
                 <?php the_content(); ?>
             </div>
         </div>
