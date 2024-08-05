@@ -4,7 +4,9 @@ class PostScroller {
 	scrollDirection = '';
 	isScrolling = false;
 	layoutGrid = document.querySelector('.layout-grid');
-	infoBlock2 = document.querySelector('.info-block-2');
+	lastInfoBlock = [
+		...document.querySelectorAll('.info-block:not(.md\\:block)'),
+	].at(-1);
 	firstPost = document.querySelector('.ds-post');
 	isFullscreenMode = false;
 
@@ -45,15 +47,15 @@ class PostScroller {
 	}
 
 	handleScroll() {
-		const infoBlock2Rect = this.infoBlock2.getBoundingClientRect();
+		const lastInfoBlockRect = this.lastInfoBlock.getBoundingClientRect();
 
 		if (
 			this.isElementInViewport(this.firstPost) &&
-			infoBlock2Rect.bottom <= 0 &&
+			lastInfoBlockRect.bottom <= 0 &&
 			!this.isFullscreenMode
 		) {
 			this.enableFullscreenMode();
-		} else if (infoBlock2Rect.bottom > 0 && this.isFullscreenMode) {
+		} else if (lastInfoBlockRect.bottom > 0 && this.isFullscreenMode) {
 			this.disableFullscreenMode();
 		}
 	}
@@ -154,7 +156,7 @@ class PostScroller {
 	}
 
 	enableFullscreenMode() {
-		this.infoBlock2.style.marginBottom = '110vh';
+		this.lastInfoBlock.style.marginBottom = '110vh';
 		this.isFullscreenMode = true;
 		this.layoutGrid.style.position = 'fixed';
 		this.layoutGrid.style.top = '0';
@@ -167,7 +169,7 @@ class PostScroller {
 	}
 
 	disableFullscreenMode() {
-		this.infoBlock2.style.marginBottom = '0';
+		this.lastInfoBlock.style.marginBottom = '0';
 		this.isFullscreenMode = false;
 		this.layoutGrid.style.position = '';
 		this.layoutGrid.style.top = '';
@@ -184,7 +186,7 @@ class PostScroller {
 
 	smoothScrollTo(duration) {
 		const targetY =
-			this.infoBlock2.getBoundingClientRect().top + window.scrollY;
+			this.lastInfoBlock.getBoundingClientRect().top + window.scrollY;
 		const startY = window.scrollY || document.documentElement.scrollTop;
 		const difference = targetY - startY;
 		const startTime = performance.now();
