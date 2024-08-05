@@ -1,7 +1,7 @@
 <?php
 $ds_service_data = $args['service'];
 ?>
-<div class="masonry-item text-white">
+<div class="masonry-item text-white <?php echo is_front_page() ? 'ds-post md:px-0 px-5 flex items-center' : ''; ?>">
     <div class="info-block-inner-block">
         <div class="flex items-center gap-x-2.5 py-1.5 mb-3">
             <?php if (!empty($ds_service_data['icon_url'])) : ?>
