@@ -9,6 +9,10 @@ body.home {
       height: 100vh;
       padding-bottom: 0;
 
+      @supports (height: 100dvh) {
+        height: 100dvh;
+      }
+
       & > span {
         height: 100%;
 
