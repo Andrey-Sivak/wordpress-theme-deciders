@@ -80,19 +80,14 @@ jQuery(document).ready(function ($) {
 		if (scdir === 'up' && Math.abs(slength) < plength - plength / pnls) {
 			slength = slength - step;
 		} else if (scdir === 'down' && slength < 0) {
-			//  TODO: test
-			// if (isElementInViewport(posts[0])) {
-			// 	console.log(999999);
-			// 	disableFullscreenMode();
-			// 	return;
-			// } else {
-			// 	slength = slength + step;
-			// }
-			//  TODO: end test
 			slength = slength + step;
+		} else if (scdir === 'down' && slength === 0) {
+			slength = 0;
+			disableFullscreenMode();
 		} else if (scdir === 'top') {
 			slength = 0;
 		}
+
 		if (hold === false) {
 			hold = true;
 			pan.style.transform = 'translateY(' + slength + 'vh)';
@@ -112,7 +107,6 @@ jQuery(document).ready(function ($) {
 	}
 
 	function _swipe(obj) {
-		console.log('_swipe');
 		var swdir,
 			sX,
 			sY,
@@ -173,16 +167,6 @@ jQuery(document).ready(function ($) {
 						) {
 							scdir = swdir;
 							_scrollY(obj);
-							//  TODO: test
-							// if (isElementInViewport(posts[0])) {
-							// 	console.log(999999);
-							// 	disableFullscreenMode();
-							// 	return;
-							// } else {
-							// 	scdir = swdir;
-							// 	_scrollY(obj);
-							// }
-							//  TODO: end test
 						}
 						e.stopPropagation();
 					}
