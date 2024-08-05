@@ -57,7 +57,6 @@ jQuery(document).ready(function ($) {
 	const infoBlock2 = document.querySelector('.info-block-2');
 	const firstPost = document.querySelector('.ds-post');
 	let isFullscreenMode = false;
-	let targetY = 0;
 
 	function _scrollY(obj) {
 		var slength,
@@ -147,7 +146,6 @@ jQuery(document).ready(function ($) {
 				var tchs = e.changedTouches[0];
 				dX = tchs.pageX - sX;
 				dY = tchs.pageY - sY;
-				targetY = dY;
 				elT = new Date().getTime() - stT;
 				if (elT <= alT) {
 					if (Math.abs(dX) >= threshold && Math.abs(dY) <= slack) {
@@ -233,16 +231,12 @@ jQuery(document).ready(function ($) {
 		well.style.transform = 'translateY(0)';
 
 		smoothScrollTo(700);
-
-		targetY = 0;
 	}
 
 	function smoothScrollTo(duration) {
-		const tarY = targetY
-			? targetY
-			: (window.innerHeight || document.documentElement.clientHeight) / 2;
-
+		const tarY = infoBlock2.getBoundingClientRect().top + window.scrollY;
 		const startY = window.scrollY || document.documentElement.scrollTop;
+
 		const difference = tarY - startY;
 		const startTime = performance.now();
 
