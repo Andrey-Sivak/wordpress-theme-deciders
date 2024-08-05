@@ -212,7 +212,7 @@ jQuery(document).ready(function ($) {
 		well.style.left = '0';
 		well.style.width = '100%';
 		well.style.overflow = 'hidden';
-		well.style.background = '#000';
+		well.style.background = '#191919';
 		well.style.zIndex = 100000;
 		document.body.style.overflow = 'hidden';
 	}
@@ -229,6 +229,12 @@ jQuery(document).ready(function ($) {
 		well.style.background = 'transparent';
 		well.style.zIndex = 'unset';
 		well.style.transform = 'translateY(0)';
+
+		window.scrollTo({
+			top: window.innerHeight || document.documentElement.clientHeight,
+			left: 0,
+			behavior: 'smooth',
+		});
 	}
 
 	well.style.transform = 'translateY(0)';
