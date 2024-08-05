@@ -90,7 +90,7 @@ jQuery(document).ready(function ($) {
 
 		if (hold === false) {
 			hold = true;
-			pan.style.transform = 'translateY(' + slength + 'vh)';
+			pan.style.transform = 'translateY(' + slength + 'dvh)';
 			setTimeout(function () {
 				hold = false;
 			}, 1000);
