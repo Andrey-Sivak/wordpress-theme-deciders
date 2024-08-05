@@ -48,8 +48,10 @@ jQuery(document).ready(function ($) {
 		return;
 	}
 
-	// TODO: temporarily for home page only.
-	if (!document.body.classList.contains('home')) return;
-
-	new PostScroller();
+	if (
+		document.body.classList.contains('home') ||
+		document.body.classList.contains('single')
+	) {
+		new PostScroller();
+	}
 });

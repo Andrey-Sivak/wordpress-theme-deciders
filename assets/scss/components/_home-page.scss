@@ -1,25 +1,29 @@
-body.home {
-  @media (max-width: 767px) {
-    .grid-sizer {
-      display: none;
+@media (max-width: 767px) {
+  .grid-sizer {
+    display: none;
+  }
+
+  .ds-post {
+    float: none;
+    height: 100vh;
+    padding-bottom: 0!important;
+
+    @supports (height: 100dvh) {
+      height: 100dvh;
     }
 
-    .ds-post {
-      float: none;
-      height: 100vh;
-      padding-bottom: 0;
+    & > img {
+      max-height: 100%;
+      object-position: center;
+      object-fit: contain;
+    }
 
-      @supports (height: 100dvh) {
-        height: 100dvh;
-      }
+    & > span {
+      height: 100%;
 
-      & > span {
-        height: 100%;
-
-        img {
-          object-position: center;
-          object-fit: contain;
-        }
+      img {
+        object-position: center;
+        object-fit: contain;
       }
     }
   }

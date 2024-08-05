@@ -37,7 +37,17 @@ get_header();
         </div>
 
         <div class="">
-            <div class="layout-grid layout-2 grid gap-5.5">
+            <div class="masonry-item info-block info-block-1 block md:hidden">
+                <?php
+                get_template_part('/template-parts/big-logo', null, array(
+                    'url' => $ds_theme_settings['logo'],
+                ));
+
+                get_template_part('template-parts/service-list');
+                ?>
+            </div>
+
+            <div class="layout-grid layout-2 grid md:gap-5.5" style="transition: .7s cubic-bezier(0.5, 0, 0.5, 1);">
                 <div class="grid-sizer"></div>
                 <?php
                 $ds_unified_content = null;
@@ -70,7 +80,7 @@ get_header();
                 }
                 ?>
 
-                <div class="masonry-item info-block info-block-1">
+                <div class="masonry-item info-block info-block-1 md:block hidden">
                     <?php
                     get_template_part('/template-parts/big-logo', null, array(
                         'url' => $ds_theme_settings['logo'],

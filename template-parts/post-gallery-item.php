@@ -7,7 +7,7 @@ if ($ds_post_gallery_item_img_id) :
     if ($image_url) :
         ?>
 
-        <div class="masonry-item">
+        <div class="masonry-item ds-post md:block flex items-center justify-center">
             <img src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
         </div>
 
