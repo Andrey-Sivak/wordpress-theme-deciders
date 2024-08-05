@@ -27,7 +27,7 @@ get_header();
             <?php get_template_part('/template-parts/contacts-block'); ?>
         </div>
 
-        <div class="layout-grid layout-4" id="well" style="transition: .7s cubic-bezier(0.5, 0, 0.5, 1);">
+        <div class="layout-grid layout-4" style="transition: .7s cubic-bezier(0.5, 0, 0.5, 1);">
             <div class="grid-sizer"></div>
 
             <?php if (!empty($ds_unified_content)) : ?>
