@@ -4,9 +4,7 @@ class PostScroller {
 	scrollDirection = '';
 	isScrolling = false;
 	layoutGrid = document.querySelector('.layout-grid');
-	lastInfoBlock = [
-		...document.querySelectorAll('.info-block:not(.md\\:block)'),
-	].at(-1);
+	lastInfoBlock = null;
 	firstPost = document.querySelector('.ds-post');
 	isFullscreenMode = false;
 
@@ -24,8 +22,23 @@ class PostScroller {
 	}
 
 	init() {
+		this.defineLastInfoBlock();
 		this.layoutGrid.style.transform = 'translateY(0)';
 		this.addEventListeners();
+	}
+
+	defineLastInfoBlock() {
+		if (document.body.classList.contains('archive')) {
+			this.lastInfoBlock = document.querySelector(
+				'.service-filter-container',
+			);
+
+			return;
+		}
+
+		this.lastInfoBlock = [
+			...document.querySelectorAll('.info-block:not(.md\\:block)'),
+		].at(-1);
 	}
 
 	addEventListeners() {
