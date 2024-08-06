@@ -47,7 +47,7 @@ get_header();
                 ?>
             </div>
 
-            <div class="layout-grid layout-2 grid md:gap-5.5" style="transition: .7s cubic-bezier(0.5, 0, 0.5, 1);">
+            <div class="layout-grid layout-2 grid md:gap-5.5">
                 <div class="grid-sizer"></div>
                 <?php
                 $ds_unified_content = null;
