@@ -174,3 +174,20 @@ body.home {
     }
   }
 }
+
+body {
+  &.fullscreen-mode {
+    overflow: hidden;
+
+    .layout-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      background-color: #191919;
+      z-index: 1000;
+      transform: translateY(0);
+    }
+  }
+}

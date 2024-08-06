@@ -171,29 +171,14 @@ class PostScroller {
 	enableFullscreenMode() {
 		this.lastInfoBlock.style.marginBottom = '110vh';
 		this.isFullscreenMode = true;
-		this.layoutGrid.style.position = 'fixed';
-		this.layoutGrid.style.top = '0';
-		this.layoutGrid.style.left = '0';
-		this.layoutGrid.style.width = '100%';
-		this.layoutGrid.style.overflow = 'hidden';
-		this.layoutGrid.style.background = '#191919';
-		this.layoutGrid.style.zIndex = 100000;
-		document.body.style.overflow = 'hidden';
+		document.body.classList.add('fullscreen-mode');
 	}
 
 	disableFullscreenMode() {
 		this.lastInfoBlock.style.marginBottom = '0';
 		this.isFullscreenMode = false;
-		this.layoutGrid.style.position = '';
-		this.layoutGrid.style.top = '';
-		this.layoutGrid.style.left = '';
-		this.layoutGrid.style.width = '';
-		this.layoutGrid.style.overflow = '';
-		document.body.style.overflow = '';
-		this.layoutGrid.style.background = 'transparent';
-		this.layoutGrid.style.zIndex = 'unset';
-		this.layoutGrid.style.transform = 'translateY(0)';
 
+		document.body.classList.remove('fullscreen-mode');
 		this.smoothScrollTo(this.settings.smoothScrollDuration);
 	}
 
