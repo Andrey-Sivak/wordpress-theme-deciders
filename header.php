@@ -23,7 +23,7 @@ $ds_theme_settings = get_option('theme_settings');
 
 <body <?php body_class( 'bg-deciders-dark lg:px-7.5 px-5 font-sf-pro text-white relative min-h-screen' ); ?>>
 <?php wp_body_open(); ?>
-<header class="site-header bg-[#e7e7e7] fixed z-20 top-0 left-1/2 -translate-x-1/2 rounded-b-[40px] pt-2.5 pb-2 px-13.5 flex items-center gap-x-9.5">
+<header class="site-header bg-[#e7e7e7] fixed z-20 md:top-0 top-auto md:bottom-auto bottom-0 left-1/2 -translate-x-1/2 md:rounded-b-[40px] md:rounded-t-[0px] rounded-t-[40px] md:pt-2.5 pt-2 pb-2 px-13.5 flex items-center gap-x-9.5">
     <?php
     $ds_home_icon_url = $ds_theme_settings['home_menu_icon'] ?? '';
     ?>
