@@ -20,7 +20,7 @@ get_header();
             </div>
             <?php get_template_part('template-parts/service-list'); ?>
         </div>
-        <div class="masonry-item info-block info-block-2 md:hidden block">
+        <div class="masonry-item info-block info-block-2 md:hidden block mb-10">
             <p class="2xl:text-50 1.5xl:text-40 text-32 mb-13.5 2xl:leading-[59px] leading-1.2">
                 <?php echo get_bloginfo('description'); ?>
             </p>

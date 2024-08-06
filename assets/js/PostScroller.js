@@ -175,7 +175,7 @@ class PostScroller {
 	}
 
 	disableFullscreenMode() {
-		this.lastInfoBlock.style.marginBottom = '0';
+		this.lastInfoBlock.style.marginBottom = '40px';
 		this.isFullscreenMode = false;
 
 		document.body.classList.remove('fullscreen-mode');
