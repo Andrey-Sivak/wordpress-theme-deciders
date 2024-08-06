@@ -126,7 +126,7 @@ class CaseFilter {
 		const casesHtml = response.cases
 			.map(
 				(caseItem) => `
-            <a href="${caseItem.permalink}" class="masonry-item group text-white">
+            <a href="${caseItem.permalink}" class="masonry-item group text-white ds-post md:pb-6.5 pb-0">
                 <img src="${caseItem.thumbnail_url}" class="relative z-20" alt="${caseItem.title}">
             </a>
         `,

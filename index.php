@@ -36,7 +36,7 @@ get_header();
                 <?php get_template_part('/template-parts/post-card', null, ['post' => $ds_unified_content[0]]); ?>
 
                 <!-- First info block (2 col) -->
-                <div class="masonry-item info-block info-block-1 md:block hidden">
+                <div class="masonry-item info-block info-block-1 pb-6.5 md:block hidden">
                     <?php get_template_part('/template-parts/big-logo', null, array(
                             'url' => $ds_theme_settings['logo'],
                     )) ?>
@@ -52,7 +52,7 @@ get_header();
                 <!-- End first info block (2 col) -->
 
                 <!-- Second info block (3 col) -->
-                <div class="masonry-item info-block info-block-2 md:block hidden">
+                <div class="masonry-item info-block info-block-2 pb-6.5 md:block hidden">
                     <p class="2xl:text-50 1.5xl:text-40 text-32 mb-13.5 2xl:leading-[59px] leading-1.2">
                         <?php echo get_bloginfo('description'); ?>
                     </p>
