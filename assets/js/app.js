@@ -48,6 +48,8 @@ jQuery(document).ready(function ($) {
 		return;
 	}
 
+	if (window.matchMedia('(min-width: 767px)').matches) return;
+
 	if (
 		document.body.classList.contains('home') ||
 		document.body.classList.contains('single')
