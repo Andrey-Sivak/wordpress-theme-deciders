@@ -434,3 +434,5 @@ function ds_filter_cases_handler(): void
 }
 
 require get_template_directory() . '/inc/ds-patterns.php';
+
+require get_template_directory() . '/inc/ds-post-mobile-image.php';
