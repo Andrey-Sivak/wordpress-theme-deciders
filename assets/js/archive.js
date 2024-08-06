@@ -1,3 +1,5 @@
+import PostScroller from './PostScroller.js';
+
 class CaseFilter {
 	constructor() {
 		this.page = 1;
@@ -8,7 +10,12 @@ class CaseFilter {
 		this.serviceItems = this.serviceGrid.querySelectorAll('.service-item');
 		this.currentServiceId = 'all';
 
-		this.initMasonry();
+		if (window.matchMedia('(min-width: 767px)').matches) {
+			this.initMasonry();
+		} else {
+			new PostScroller();
+		}
+
 		this.initEventListeners();
 		this.updateGrid('all');
 	}
