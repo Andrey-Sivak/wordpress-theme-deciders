@@ -10,12 +10,23 @@ class CaseFilter {
 		this.loadMore = document.getElementById('load-more');
 		this.serviceGrid = document.getElementById('service-grid');
 		this.serviceItems = this.serviceGrid.querySelectorAll('.service-item');
+		this.serviceMobileFilter = document.querySelector('.ds-mobile-filters');
+		this.serviceMobileFilterButton = this.serviceMobileFilter.querySelector(
+			'.ds-mobile-filters__button',
+		);
+		this.serviceMobileFilterItems = [
+			...this.serviceMobileFilter.querySelectorAll('.service-item-mob'),
+		];
+		this.mobileOverlay = document.querySelector(
+			'.ds-mobile-filters__overlay',
+		);
 		this.currentServiceId = 'all';
+		this.postScroller = null;
 
 		if (!this.isMobile) {
 			this.initMasonry();
 		} else {
-			new PostScroller();
+			this.postScroller = new PostScroller();
 		}
 
 		this.initEventListeners();
@@ -35,6 +46,69 @@ class CaseFilter {
 		});
 	}
 
+	displayMobileFilter(e) {
+		if (e) {
+			e.preventDefault();
+		}
+
+		if (!this.isMobile) return;
+
+		if (this.serviceMobileFilter.classList.contains('active')) {
+			this.serviceMobileFilter.classList.remove('active');
+			return;
+		}
+
+		this.serviceMobileFilter.classList.add('active');
+	}
+
+	selectMobileFilter(e) {
+		e.preventDefault();
+
+		const target = e.currentTarget;
+		const serviceId = target.dataset.serviceId;
+
+		const activeItemText = this.serviceMobileFilterButton.querySelector(
+			'.ds-mobile-filters__button_text',
+		).innerHTML;
+		const targetText = target.querySelector(
+			'.service-item-mob__text',
+		).innerHTML;
+
+		if (activeItemText === targetText) {
+			this.displayMobileFilter();
+			return;
+		}
+
+		const oldItem = this.serviceMobileFilterItems.find((item) =>
+			item.classList.contains('hidden'),
+		);
+
+		this.serviceMobileFilterButton.querySelector(
+			'.ds-mobile-filters__button_icon',
+		).innerHTML = target.querySelector('.service-item-mob__icon').innerHTML;
+
+		this.serviceMobileFilterButton.querySelector(
+			'.ds-mobile-filters__button_text',
+		).innerHTML = target.querySelector('.service-item-mob__text').innerHTML;
+
+		target.classList.remove('flex');
+		target.classList.add('hidden');
+
+		oldItem.classList.remove('hidden');
+		oldItem.classList.add('flex');
+
+		this.displayMobileFilter();
+
+		this.currentServiceId = serviceId;
+		this.updateGrid(this.currentServiceId);
+		this.page = 1;
+		this.loadCases();
+	}
+
+	mobileFilter(e) {
+		e.preventDefault();
+	}
+
 	initEventListeners() {
 		this.serviceItems.forEach((item) => {
 			item.addEventListener(
@@ -42,6 +116,25 @@ class CaseFilter {
 				this.handleServiceItemClick.bind(this),
 			);
 		});
+
+		if (this.isMobile) {
+			this.serviceMobileFilterButton.addEventListener(
+				'click',
+				this.displayMobileFilter.bind(this),
+			);
+
+			this.serviceMobileFilterItems.forEach((item) =>
+				item.addEventListener(
+					'click',
+					this.selectMobileFilter.bind(this),
+				),
+			);
+
+			this.mobileOverlay.addEventListener(
+				'click',
+				this.displayMobileFilter.bind(this),
+			);
+		}
 
 		// document.getElementById('load-more-btn').addEventListener('click', this.handleLoadMore.bind(this));
 
@@ -150,6 +243,13 @@ class CaseFilter {
 			imagesLoaded(this.casesList).on('progress', () => {
 				this.masonry.layout();
 			});
+		} else {
+			this.postScroller.smoothScrollTo(
+				700,
+				this.casesList.getBoundingClientRect().top,
+			);
+			this.casesList.innerHTML = response.cases;
+			this.postScroller = new PostScroller();
 		}
 
 		this.loading = false;

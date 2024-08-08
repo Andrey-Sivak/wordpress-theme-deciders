@@ -133,5 +133,24 @@ body {
       z-index: 1000;
       transform: translateY(0);
     }
+
+    .ds-mobile-filters {
+      transform: translateY(0);
+
+      &.active {
+
+        .ds-mobile-filters__button {
+          @apply pb-2 border-white/20 border-b;
+        }
+
+        .ds-mobile-filters__list {
+          display: grid;
+        }
+
+        & + .ds-mobile-filters__overlay {
+          display: block;
+        }
+      }
+    }
   }
 }

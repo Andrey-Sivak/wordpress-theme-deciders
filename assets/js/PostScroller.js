@@ -182,9 +182,11 @@ class PostScroller {
 		this.smoothScrollTo(this.settings.smoothScrollDuration);
 	}
 
-	smoothScrollTo(duration) {
-		const targetY =
-			this.lastInfoBlock.getBoundingClientRect().top + window.scrollY;
+	smoothScrollTo(
+		duration,
+		targetY = this.lastInfoBlock.getBoundingClientRect().top +
+			window.scrollY,
+	) {
 		const startY = window.scrollY || document.documentElement.scrollTop;
 		const difference = targetY - startY;
 		const startTime = performance.now();

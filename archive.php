@@ -7,6 +7,8 @@ $ds_cases = ds_get_unified_post_types_array(array(
 get_header();
 ?>
 
+    <?php get_template_part('/template-parts/service-filter', 'mobile'); ?>
+
     <main class="grid xl:grid-cols-[1fr_3fr] lg:grid-cols-[1fr_2fr] md:grid-cols-[1.5fr_2fr] gap-x-6 gap-y-6 relative z-10">
         <div class="relative">
             <?php
@@ -14,7 +16,7 @@ get_header();
                 'url' => $ds_theme_settings['logo'],
             ));
             ?>
-            <div class="sticky top-5 left-0 service-filter-container">
+            <div class="md:sticky top-5 left-0 service-filter-container">
                 <?php
                 get_template_part('/template-parts/service-filter');
                 get_template_part('/template-parts/contacts-block');
