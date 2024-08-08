@@ -1,6 +1,8 @@
 import PostScroller from './PostScroller.js';
 
 class CaseFilter {
+	isMobile = !window.matchMedia('(min-width: 767px)').matches;
+
 	constructor() {
 		this.page = 1;
 		this.loading = false;
@@ -10,7 +12,7 @@ class CaseFilter {
 		this.serviceItems = this.serviceGrid.querySelectorAll('.service-item');
 		this.currentServiceId = 'all';
 
-		if (window.matchMedia('(min-width: 767px)').matches) {
+		if (!this.isMobile) {
 			this.initMasonry();
 		} else {
 			new PostScroller();
@@ -123,41 +125,34 @@ class CaseFilter {
 	}
 
 	handleCasesResponse(response, append) {
-		const casesHtml = response.cases
-			.map(
-				(caseItem) => `
-            <a href="${caseItem.permalink}" class="masonry-item group text-white ds-post md:pb-6.5 pb-0">
-                <img src="${caseItem.thumbnail_url}" class="relative z-20" alt="${caseItem.title}">
-            </a>
-        `,
-			)
-			.join('');
-
-		if (append) {
-			const tempDiv = document.createElement('div');
-			tempDiv.innerHTML = casesHtml;
-			const newItems = tempDiv.children;
-			this.casesList.append(...newItems);
-			this.masonry.appended(newItems);
-		} else {
-			if (Array.isArray(response.cases) && response.cases.length) {
-				this.casesList.innerHTML =
-					'<div class="grid-sizer"></div>' + casesHtml;
-				this.masonry.reloadItems();
+		if (!this.isMobile) {
+			if (append) {
+				const tempDiv = document.createElement('div');
+				tempDiv.innerHTML = response.cases;
+				const newItems = tempDiv.children;
+				this.casesList.append(...newItems);
+				this.masonry.appended(newItems);
 			} else {
-				this.casesList.innerHTML =
-					'В выбранной категории еще нет доступных кейсов';
-				this.loading = false;
-				return;
+				if (response?.cases) {
+					this.casesList.innerHTML =
+						'<div class="grid-sizer"></div>' + response.cases;
+					this.masonry.reloadItems();
+				} else {
+					this.casesList.innerHTML =
+						'В выбранной категории еще нет доступных кейсов';
+					this.loading = false;
+					return;
+				}
 			}
+
+			// this.loadMore.style.display = response.has_more ? 'block' : 'none';
+
+			imagesLoaded(this.casesList).on('progress', () => {
+				this.masonry.layout();
+			});
 		}
 
-		// this.loadMore.style.display = response.has_more ? 'block' : 'none';
 		this.loading = false;
-
-		imagesLoaded(this.casesList).on('progress', () => {
-			this.masonry.layout();
-		});
 	}
 }
 

@@ -255,6 +255,7 @@ function ds_get_unified_post_types_array(array $options = array()): array
         'post_count' => -1,
         'case_count' => -1,
         'service_count' => -1,
+        'case_meta_query' => null,
         'orderby' => 'date',
         'order' => 'DESC',
         'service_id' => null
@@ -298,7 +299,7 @@ function ds_get_unified_post_types_array(array $options = array()): array
         );
 
         // If a service ID is provided, add a meta query to filter cases
-        if ($args['service_id']) {
+        if ($args['service_id'] && $args['service_id'] !== 'all') {
             $case_args['meta_query'] = array(
                 array(
                     'key' => '_associated_service',
@@ -311,7 +312,6 @@ function ds_get_unified_post_types_array(array $options = array()): array
         $cases = get_posts($case_args);
 
         foreach ($cases as $case) {
-//        $associated_service = get_post_meta($case->ID, '_associated_service', true);
             $unified_array[] = array(
                 'id' => $case->ID,
                 'title' => $case->post_title,
@@ -320,7 +320,6 @@ function ds_get_unified_post_types_array(array $options = array()): array
                 'excerpt' => get_the_excerpt($case),
                 'mobile_image' => get_post_meta( $case->ID, 'mobile_image', true ),
 //            'date' => $case->post_date,
-//            'associated_service' => $associated_service ? get_the_title($associated_service) : '',
             );
         }
     }
@@ -394,45 +393,32 @@ add_action('wp_ajax_nopriv_ds_filter_cases_handler', 'ds_filter_cases_handler');
 function ds_filter_cases_handler(): void
 {
     $service_id = isset($_POST['service_id']) ? sanitize_text_field($_POST['service_id']) : 'all';
-    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+//    $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
 
-    $args = array(
-        'post_type' => 'case',
-        'post_status' => 'publish',
-        'posts_per_page' => -1,
-        'paged' => $page,
+    ob_start();
+
+    $cases = ds_get_unified_post_types_array(array(
+        'exclude_posts' => array('post', 'service'),
+        'args' => array('service_id' => $service_id),
+    ));
+
+    if (!empty($cases)) {
+        foreach ($cases as $case) {
+            get_template_part('/template-parts/post-card', null, ['post' => $case]);
+        }
+    }
+
+    $html = ob_get_clean();
+
+    $response = array(
+        'success' => true,
+        'cases' => $html,
+//        'has_more' => $cases_query->max_num_pages > $page,
     );
 
-    if ($service_id !== 'all') {
-        $args['meta_query'] = array(
-            array(
-                'key' => '_associated_service',
-                'value' => $service_id,
-            ),
-        );
-    }
+    wp_send_json($response);
 
-    $cases_query = new WP_Query($args);
-    $cases = $cases_query->posts;
-
-    $response = array();
-
-    foreach ($cases as $case) {
-        $thumbnail_id = get_post_thumbnail_id($case->ID);
-        $thumbnail_url = $thumbnail_id ? wp_get_attachment_image_url($thumbnail_id, 'large') : '';
-
-        $response[] = array(
-            'title' => $case->post_title,
-            'id' => $case->ID,
-            'permalink' => get_permalink($case->ID),
-            'thumbnail_url' => $thumbnail_url,
-        );
-    }
-
-    wp_send_json(array(
-        'cases' => $response,
-        'has_more' => $cases_query->max_num_pages > $page,
-    ));
+    wp_die();
 }
 
 require get_template_directory() . '/inc/ds-patterns.php';
