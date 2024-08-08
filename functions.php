@@ -281,6 +281,7 @@ function ds_get_unified_post_types_array(array $options = array()): array
                 'type' => 'post',
                 'permalink' => get_permalink($post->ID),
                 'excerpt' => get_the_excerpt($post),
+                'mobile_image' => get_post_meta( $post->ID, 'mobile_image', true ),
 //            'date' => $post->post_date,
             );
         }
@@ -317,6 +318,7 @@ function ds_get_unified_post_types_array(array $options = array()): array
                 'type' => 'case',
                 'permalink' => get_permalink($case->ID),
                 'excerpt' => get_the_excerpt($case),
+                'mobile_image' => get_post_meta( $case->ID, 'mobile_image', true ),
 //            'date' => $case->post_date,
 //            'associated_service' => $associated_service ? get_the_title($associated_service) : '',
             );
