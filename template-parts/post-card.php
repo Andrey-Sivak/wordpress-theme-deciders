@@ -17,6 +17,7 @@ $op_additional_thumbnail_id = attachment_url_to_postid($op_additional_thumbnail)
                 [
                     'class' => 'ds-post__inner_thumbnail',
                     'alt' => $ds_post_data['title'],
+                    'loading' => 'lazy',
                 ]
             );
         }
@@ -31,6 +32,7 @@ $op_additional_thumbnail_id = attachment_url_to_postid($op_additional_thumbnail)
                 [
                     'class' => 'ds-post__inner_mob-image',
                     'alt' => $ds_post_data['title'],
+                    'loading' => 'lazy',
                 ]
             );
         }
