@@ -9,6 +9,8 @@ $op_additional_thumbnail_id = attachment_url_to_postid($op_additional_thumbnail)
         class="masonry-item group text-white ds-post md:pb-6.5 pb-0 <?php echo $op_additional_thumbnail ? 'ds-post__has-mob-img' : ''; ?>"
 >
     <span class="ds-post__inner">
+        <?php get_template_part('/vector-images/image-loader', null, array('color' => $ds_post_data['type'] == 'post' ? '#63A2ED' : '#FC8AEA')); ?>
+
         <?php
         if (has_post_thumbnail($ds_post_data['id'])) {
             echo get_the_post_thumbnail(
