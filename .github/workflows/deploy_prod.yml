@@ -20,6 +20,20 @@ jobs:
       - name: 🚀 Build code
         run: |
           npm run build
+      - name: 🚚 Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: 🚚 Install Composer
+        run: |
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php composer-setup.php
+          php -r "unlink('composer-setup.php');"
+          mv composer.phar /usr/local/bin/composer
+
+      - name: 🚚 Install PHP dependencies
+        run: composer install --no-dev --optimize-autoloader
       - name: 🚀 Delete npm folder # a plug so that the ftp action does not load modules
         run: rm -r node_modules
       - name: 📂 Sync files
