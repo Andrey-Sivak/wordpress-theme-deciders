@@ -1,6 +1,7 @@
 <?php
 $ds_post_data = $args['post'];
 $op_additional_thumbnail = get_post_meta( $ds_post_data['id'], 'mobile_image', true );
+$op_additional_thumbnail_id = attachment_url_to_postid($op_additional_thumbnail);
 ?>
 
 <a
@@ -15,18 +16,25 @@ $op_additional_thumbnail = get_post_meta( $ds_post_data['id'], 'mobile_image', t
                 'large',
                 [
                     'class' => 'ds-post__inner_thumbnail',
+                    'alt' => $ds_post_data['title'],
                 ]
             );
         }
         ?>
 
-        <?php if ($op_additional_thumbnail) : ?>
-            <img
-                    src="<?php echo $op_additional_thumbnail; ?>"
-                    alt="<?php echo $ds_post_data['title']; ?>"
-                    class="ds-post__inner_mob-image"
-            >
-        <?php endif; ?>
+        <?php
+        if ($op_additional_thumbnail) {
+            echo wp_get_attachment_image(
+                $op_additional_thumbnail_id,
+                'large',
+                false,
+                [
+                    'class' => 'ds-post__inner_mob-image',
+                    'alt' => $ds_post_data['title'],
+                ]
+            );
+        }
+        ?>
         <span class="ds-post__inner_content">
             <span class="ds-post__inner_title"><?php echo $ds_post_data['title']; ?></span>
             <span class="ds-post__inner_excerpt"><?php echo $ds_post_data['excerpt']; ?></span>
