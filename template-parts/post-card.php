@@ -31,10 +31,5 @@ $op_additional_thumbnail = get_post_meta( $ds_post_data['id'], 'mobile_image', t
             <span class="ds-post__inner_title"><?php echo $ds_post_data['title']; ?></span>
             <span class="ds-post__inner_excerpt"><?php echo $ds_post_data['excerpt']; ?></span>
         </span>
-
-<!--        <span class="">-->
-<!--            <span class="">--><?php //echo $ds_post_data['title']; ?><!--</span>-->
-<!--            <span class="">--><?php //echo $ds_post_data['excerpt']; ?><!--</span>-->
-<!--        </span>-->
     </span>
 </a>
