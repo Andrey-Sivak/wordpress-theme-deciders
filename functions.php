@@ -311,16 +311,44 @@ function ds_get_unified_post_types_array(array $options = array()): array
 
         $cases = get_posts($case_args);
 
-        foreach ($cases as $case) {
-            $unified_array[] = array(
-                'id' => $case->ID,
-                'title' => $case->post_title,
-                'type' => 'case',
-                'permalink' => get_permalink($case->ID),
-                'excerpt' => get_the_excerpt($case),
-                'mobile_image' => get_post_meta( $case->ID, 'mobile_image', true ),
+        if (!empty($unified_array)) {
+            // Interleave posts and cases
+            $temp_array = array();
+            $post_index = 0;
+            $case_index = 0;
+
+            while ($post_index < count($unified_array) || $case_index < count($cases)) {
+                if ($post_index < count($unified_array)) {
+                    $temp_array[] = $unified_array[$post_index];
+                    $post_index++;
+                }
+                if ($case_index < count($cases)) {
+                    $case = $cases[$case_index];
+                    $temp_array[] = array(
+                        'id' => $case->ID,
+                        'title' => $case->post_title,
+                        'type' => 'case',
+                        'permalink' => get_permalink($case->ID),
+                        'excerpt' => get_the_excerpt($case),
+                        'mobile_image' => get_post_meta($case->ID, 'mobile_image', true),
+                    );
+                    $case_index++;
+                }
+            }
+
+            $unified_array = $temp_array;
+        } else {
+            foreach ($cases as $case) {
+                $unified_array[] = array(
+                    'id' => $case->ID,
+                    'title' => $case->post_title,
+                    'type' => 'case',
+                    'permalink' => get_permalink($case->ID),
+                    'excerpt' => get_the_excerpt($case),
+                    'mobile_image' => get_post_meta( $case->ID, 'mobile_image', true ),
 //            'date' => $case->post_date,
-            );
+                );
+            }
         }
     }
 
