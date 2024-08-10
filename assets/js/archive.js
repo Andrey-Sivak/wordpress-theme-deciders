@@ -61,12 +61,7 @@ class CaseFilter {
 		this.serviceMobileFilter.classList.add('active');
 	}
 
-	selectMobileFilter(e) {
-		e.preventDefault();
-
-		const target = e.currentTarget;
-		const serviceId = target.dataset.serviceId;
-
+	switchMobileFilter(target, isDropdown = true) {
 		const activeItemText = this.serviceMobileFilterButton.querySelector(
 			'.ds-mobile-filters__button_text',
 		).innerHTML;
@@ -75,7 +70,9 @@ class CaseFilter {
 		).innerHTML;
 
 		if (activeItemText === targetText) {
-			this.displayMobileFilter();
+			if (isDropdown) {
+				this.displayMobileFilter();
+			}
 			return;
 		}
 
@@ -96,6 +93,15 @@ class CaseFilter {
 
 		oldItem.classList.remove('hidden');
 		oldItem.classList.add('flex');
+	}
+
+	selectMobileFilter(e) {
+		e.preventDefault();
+
+		const target = e.currentTarget;
+		const serviceId = target.dataset.serviceId;
+
+		this.switchMobileFilter(target);
 
 		this.displayMobileFilter();
 
@@ -191,6 +197,13 @@ class CaseFilter {
 		this.serviceGrid.style.gridTemplateAreas =
 			'"selected selected" "." "."';
 		selectedItem.style.gridArea = 'selected';
+
+		if (this.isMobile) {
+			const targetMobFilter = this.serviceMobileFilterItems.find(
+				(item) => item.dataset.serviceId === selectedServiceId,
+			);
+			this.switchMobileFilter(targetMobFilter, false);
+		}
 	}
 
 	loadCases(append = false) {
