@@ -6,6 +6,7 @@ class PostScroller {
 	layoutGrid = document.querySelector('.layout-grid');
 	lastInfoBlock = null;
 	firstPost = document.querySelector('.ds-post');
+	toTopButton = document.querySelector('.ds-mobile-to-top');
 	isFullscreenMode = false;
 
 	constructor() {
@@ -19,6 +20,13 @@ class PostScroller {
 		};
 
 		this.init();
+	}
+
+	toTop(e) {
+		if (e) {
+			e.preventDefault();
+		}
+		this.layoutGrid.style.transform = 'translateY(0)';
 	}
 
 	init() {
@@ -49,6 +57,7 @@ class PostScroller {
 		this.posts.forEach((post) =>
 			post.addEventListener('click', this.handlePostClick.bind(this)),
 		);
+		this.toTopButton.addEventListener('click', this.toTop.bind(this));
 	}
 
 	handleWheel(event) {
@@ -99,6 +108,15 @@ class PostScroller {
 			this.disableFullscreenMode();
 		} else if (this.scrollDirection === 'top') {
 			scrollLength = 0;
+		}
+
+		console.log(scrollLength);
+		if (scrollLength >= 0) {
+			this.toTopButton.classList.add('hide');
+		} else {
+			if (this.toTopButton.classList.contains('hide')) {
+				this.toTopButton.classList.remove('hide');
+			}
 		}
 
 		if (!this.isScrolling) {

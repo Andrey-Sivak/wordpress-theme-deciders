@@ -244,10 +244,7 @@ class CaseFilter {
 				this.masonry.layout();
 			});
 		} else {
-			this.postScroller.smoothScrollTo(
-				700,
-				this.casesList.getBoundingClientRect().top,
-			);
+			this.postScroller.toTop();
 			this.casesList.innerHTML = response.cases;
 			this.postScroller = new PostScroller();
 		}
