@@ -245,6 +245,7 @@ class CaseFilter {
 			});
 		} else {
 			this.postScroller.toTop();
+			this.postScroller.destroy();
 			this.casesList.innerHTML = response.cases;
 			this.postScroller = new PostScroller();
 		}

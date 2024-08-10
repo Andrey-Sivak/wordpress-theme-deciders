@@ -8,6 +8,9 @@ class PostScroller {
 	firstPost = document.querySelector('.ds-post');
 	toTopButton = document.querySelector('.ds-mobile-to-top');
 	isFullscreenMode = false;
+	startX = 0;
+	startY = 0;
+	startTime = 0;
 
 	constructor() {
 		this.settings = {
@@ -18,6 +21,14 @@ class PostScroller {
 			scrollAnimationDuration: 1000,
 			smoothScrollDuration: 700,
 		};
+
+		this.boundHandleWheel = this.handleWheel.bind(this);
+		this.boundHandleScroll = this.handleScroll.bind(this);
+		this.boundHandlePostClick = this.handlePostClick.bind(this);
+		this.boundToTop = this.toTop.bind(this);
+		this.boundHandleTouchStart = this.handleTouchStart.bind(this);
+		this.boundHandleTouchMove = this.handleTouchMove.bind(this);
+		this.boundHandleTouchEnd = this.handleTouchEnd.bind(this);
 
 		this.init();
 	}
@@ -35,6 +46,29 @@ class PostScroller {
 		this.addEventListeners();
 	}
 
+	destroy() {
+		this.layoutGrid.removeEventListener('wheel', this.boundHandleWheel);
+		window.removeEventListener('scroll', this.boundHandleScroll);
+		window.removeEventListener('resize', this.boundHandleScroll);
+		this.posts.forEach((post) =>
+			post.removeEventListener('click', this.boundHandlePostClick),
+		);
+		this.toTopButton.removeEventListener('click', this.boundToTop);
+
+		this.layoutGrid.removeEventListener(
+			'touchstart',
+			this.boundHandleTouchStart,
+		);
+		this.layoutGrid.removeEventListener(
+			'touchmove',
+			this.boundHandleTouchMove,
+		);
+		this.layoutGrid.removeEventListener(
+			'touchend',
+			this.boundHandleTouchEnd,
+		);
+	}
+
 	defineLastInfoBlock() {
 		if (document.body.classList.contains('archive')) {
 			this.lastInfoBlock = document.querySelector(
@@ -50,14 +84,23 @@ class PostScroller {
 	}
 
 	addEventListeners() {
-		this.layoutGrid.addEventListener('wheel', this.handleWheel.bind(this));
-		this.addSwipeListeners(this.layoutGrid);
-		window.addEventListener('scroll', this.handleScroll.bind(this));
-		window.addEventListener('resize', this.handleScroll.bind(this));
+		this.layoutGrid.addEventListener('wheel', this.boundHandleWheel);
+		window.addEventListener('scroll', this.boundHandleScroll);
+		window.addEventListener('resize', this.boundHandleScroll);
 		this.posts.forEach((post) =>
-			post.addEventListener('click', this.handlePostClick.bind(this)),
+			post.addEventListener('click', this.boundHandlePostClick),
 		);
-		this.toTopButton.addEventListener('click', this.toTop.bind(this));
+		this.toTopButton.addEventListener('click', this.boundToTop);
+
+		this.layoutGrid.addEventListener(
+			'touchstart',
+			this.boundHandleTouchStart,
+		);
+		this.layoutGrid.addEventListener(
+			'touchmove',
+			this.boundHandleTouchMove,
+		);
+		this.layoutGrid.addEventListener('touchend', this.boundHandleTouchEnd);
 	}
 
 	handleWheel(event) {
@@ -110,7 +153,6 @@ class PostScroller {
 			scrollLength = 0;
 		}
 
-		console.log(scrollLength);
 		if (scrollLength >= 0) {
 			this.toTopButton.classList.add('hide');
 		} else {
@@ -128,50 +170,46 @@ class PostScroller {
 		}
 	}
 
-	addSwipeListeners(element) {
-		let startX, startY, startTime;
+	handleTouchStart(e) {
+		const touch = e.changedTouches[0];
+		this.startX = touch.pageX;
+		this.startY = touch.pageY;
+		this.startTime = new Date().getTime();
+	}
 
-		element.addEventListener('touchstart', (e) => {
-			const touch = e.changedTouches[0];
-			startX = touch.pageX;
-			startY = touch.pageY;
-			startTime = new Date().getTime();
-		});
+	handleTouchMove(e) {
+		if (this.isFullscreenMode) {
+			e.preventDefault();
+		}
+	}
 
-		element.addEventListener('touchmove', (e) => {
-			if (this.isFullscreenMode) {
-				e.preventDefault();
-			}
-		});
+	handleTouchEnd(e) {
+		const touch = e.changedTouches[0];
+		const deltaX = touch.pageX - this.startX;
+		const deltaY = touch.pageY - this.startY;
+		const elapsedTime = new Date().getTime() - this.startTime;
 
-		element.addEventListener('touchend', (e) => {
-			const touch = e.changedTouches[0];
-			const deltaX = touch.pageX - startX;
-			const deltaY = touch.pageY - startY;
-			const elapsedTime = new Date().getTime() - startTime;
-
-			if (elapsedTime <= this.settings.allowedTouchTime) {
+		if (elapsedTime <= this.settings.allowedTouchTime) {
+			if (
+				Math.abs(deltaX) >= this.settings.swipeThreshold &&
+				Math.abs(deltaY) <= this.settings.swipeSlack
+			) {
+				// Horizontal swipe - not handled in this code
+			} else if (
+				Math.abs(deltaY) >= this.settings.swipeThreshold &&
+				Math.abs(deltaX) <= this.settings.swipeSlack
+			) {
+				this.scrollDirection = deltaY < 0 ? 'up' : 'down';
 				if (
-					Math.abs(deltaX) >= this.settings.swipeThreshold &&
-					Math.abs(deltaY) <= this.settings.swipeSlack
+					this.scrollDirection === 'up' ||
+					(this.scrollDirection === 'down' &&
+						this.layoutGrid.style.transform !== 'translateY(0)')
 				) {
-					// Horizontal swipe - not handled in this code
-				} else if (
-					Math.abs(deltaY) >= this.settings.swipeThreshold &&
-					Math.abs(deltaX) <= this.settings.swipeSlack
-				) {
-					this.scrollDirection = deltaY < 0 ? 'up' : 'down';
-					if (
-						this.scrollDirection === 'up' ||
-						(this.scrollDirection === 'down' &&
-							element.style.transform !== 'translateY(0)')
-					) {
-						this.scrollY(element);
-					}
+					this.scrollY(this.layoutGrid);
 				}
 			}
-			e.stopPropagation();
-		});
+		}
+		e.stopPropagation();
 	}
 
 	isElementInViewport(element) {
