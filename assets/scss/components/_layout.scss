@@ -90,6 +90,8 @@
       order: unset;
       float: none;
       width: 100%;
+      overflow: hidden;
+      display: flex!important;
 
       @media(min-width: 767px) {
         float: left;
@@ -110,10 +112,18 @@
         padding-bottom: 26px;
       }
 
-      & > img {
-        width: 100%;
-        display: block;
-        max-width: 100%;
+      & picture {
+        //display: flex;
+        //justify-content: center;
+        //align-items: center;
+        //height: 100%;
+
+        & > img {
+          width: 100%;
+          display: block;
+          max-width: 100%;
+          object-fit: contain;
+        }
       }
     }
   }
