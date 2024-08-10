@@ -17,7 +17,7 @@ $ds_additional_thumbnail_id = attachment_url_to_postid($ds_additional_thumbnail)
             get_template_part('/template-parts/advanced-image', null, array(
                 'img_id' => get_post_thumbnail_id($ds_post_data['id']),
                 'class' => 'ds-post__inner_thumbnail',
-                'alt' => $ds_post_data['title'],
+                'alt' => 'Изображение для' . $ds_post_data['title'],
             ));
         }
         ?>
@@ -27,7 +27,7 @@ $ds_additional_thumbnail_id = attachment_url_to_postid($ds_additional_thumbnail)
             get_template_part('/template-parts/advanced-image', null, array(
                 'img_id' => $ds_additional_thumbnail_id,
                 'class' => 'ds-post__inner_mob-image',
-                'alt' => $ds_post_data['title'],
+                'alt' => 'Изображение для' . $ds_post_data['title'],
             ));
         }
         ?>

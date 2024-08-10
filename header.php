@@ -32,6 +32,7 @@ $ds_theme_settings = get_option('theme_settings');
     </a>
     <a href="<?php echo get_home_url() . '/case/'; ?>" class="h-5">
         <?php get_template_part('/vector-images/icon', 'cases-menu'); ?>
+        <span class="hidden">Кейсы</span>
     </a>
 </header>
 

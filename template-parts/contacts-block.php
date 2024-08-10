@@ -24,7 +24,7 @@ $ds_theme_settings = get_option('theme_settings');
         if (!empty($ds_theme_settings['social_links'])) {
             foreach ($ds_theme_settings['social_links'] as $link) {
                 if (!empty($link['url']) && !empty($link['icon'])) {
-                    echo '<a href="' . esc_url($link['url']) . '" target="_blank" class="hg:w-8 1.5xl:w-6 w-8"><img src="' . esc_attr($link['icon']) . '" /></a>';
+                    echo '<a href="' . esc_url($link['url']) . '" target="_blank" class="hg:w-8 1.5xl:w-6 w-8"><img src="' . esc_attr($link['icon']) . '" alt="социальные сети" /><span class="hidden">Контакты | социальные сети</span></a>';
                 }
             }
         }
