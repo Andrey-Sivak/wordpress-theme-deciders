@@ -8,7 +8,7 @@ $ds_services = get_posts(array(
 ));
 ?>
 
-<div class="ds-mobile-filters fixed md:hidden block top-5 -translate-y-[150px] left-5 bg-deciders-dark py-2 rounded-[16px] transition-all duration-500 z-40 border border-white/20">
+<div class="ds-mobile-filters fixed md:hidden block top-5 -translate-y-[150px] left-5 bg-deciders-dark py-2 rounded-2xl transition-all duration-500 z-40 border border-white/20">
     <div class="ds-mobile-filters__button flex items-center gap-3 px-5">
         <span class="ds-mobile-filters__button_icon"><?php get_template_part('/vector-images/icon', 'all-service-filter'); ?></span>
         <div class="ds-mobile-filters__button_text font-semibold">Все</div>
