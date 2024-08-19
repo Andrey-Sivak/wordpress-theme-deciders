@@ -3,7 +3,7 @@ $ds_post_gallery_item_img_id = $args['img_id'];
 
 if ($ds_post_gallery_item_img_id) :
     ?>
-    <div class="masonry-item ds-post md:block flex items-center justify-center">
+    <div class="masonry-item ds-post md:block flex items-center justify-center relative">
         <?php
         get_template_part('/vector-images/image-loader', null, array('color' => '#63A2ED'));
         get_template_part('/template-parts/advanced-image', null, array(
