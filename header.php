@@ -66,4 +66,4 @@ $ds_theme_settings = get_option('theme_settings');
     ?>
 </div>
 
-<div class="ds-mobile-to-top hide fixed md:hidden block top-auto bottom-3 left-auto right-3 bg-deciders-dark py-2 px-3 rounded-2xl transition-all duration-500 z-30 border border-white/20">Вверх</div>
+<div class="ds-mobile-to-top hide fixed md:hidden block top-auto bottom-3 left-3 bg-deciders-dark py-2 px-3 rounded-2xl transition-all duration-500 z-30 border border-white/20">Вверх</div>
