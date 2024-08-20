@@ -117,11 +117,6 @@
         & > img {
           width: 100%;
           max-width: 100%;
-          object-fit: cover;
-
-          @media(min-width: 767px) {
-            object-fit: contain;
-          }
         }
       }
     }
@@ -169,5 +164,12 @@ body {
 
   &.hide {
     @apply translate-y-[150px];
+  }
+}
+
+body.single.single-case {
+
+  .ds-post {
+    height: auto!important;
   }
 }

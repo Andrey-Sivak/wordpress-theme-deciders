@@ -47,7 +47,7 @@ get_header();
                 ?>
             </div>
 
-            <div class="layout-grid layout-2 grid md:gap-5.5">
+            <div class="layout-grid layout-2 grid md:gap-5.5 <?php echo is_singular('case') ? ' md:gap-y-0 gap-y-4' : '' ?>">
                 <div class="grid-sizer"></div>
                 <?php
                 $ds_unified_content = null;

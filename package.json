@@ -81,7 +81,8 @@
     "webpack-stream": "^7.0.0"
   },
   "dependencies": {
-    "@10up/block-components": "^1.17.4"
+    "@10up/block-components": "^1.17.4",
+    "fslightbox": "^3.4.1"
   },
   "scripts": {
     "guten-build": "wp-scripts build --webpack-src-dir=guten/src/blocks --output-path=guten/build",

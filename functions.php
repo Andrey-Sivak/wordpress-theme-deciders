@@ -201,6 +201,16 @@ function ds_scripts() {
         );
 
         wp_localize_script('main-script', 'options', $options);
+
+        if (is_singular('case')) {
+            wp_enqueue_script(
+                'case-gallery-script',
+                get_template_directory_uri() . '/dist/js/case-gallery.min.js',
+                [],
+                DS_VERSION,
+                true
+            );
+        }
     }
 }
 add_action( 'wp_enqueue_scripts', 'ds_scripts' );

@@ -52,7 +52,7 @@ jQuery(document).ready(function ($) {
 
 	if (
 		document.body.classList.contains('home') ||
-		document.body.classList.contains('single')
+		document.body.classList.contains('single-post')
 	) {
 		new PostScroller();
 	}
