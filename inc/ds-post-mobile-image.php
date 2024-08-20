@@ -9,8 +9,25 @@ function ds_register_meta_mobile_image(): void
             'mobile_image',
             [
                 'show_in_rest' => true,
-                'single'       => true,
-                'type'         => 'string',
+                'single' => true,
+                'type' => 'string',
+            ]
+        );
+    }
+}
+
+function ds_register_meta_cover(): void
+{
+    $ds_post_types = ['post', 'case'];
+
+    foreach ($ds_post_types as $post_type) {
+        register_post_meta(
+            $post_type,
+            'cover',
+            [
+                'show_in_rest' => true,
+                'single' => true,
+                'type' => 'boolean',
             ]
         );
     }
@@ -29,18 +46,28 @@ function ds_add_mobile_image_metabox(): void
             'side',
             'high'
         );
+
+        add_meta_box(
+            'cover_metabox',
+            'Отображение',
+            'ds_render_cover_metabox',
+            $post_type,
+            'side',
+            'high'
+        );
     }
 }
 
-function ds_render_mobile_image_metabox( $post ): void
+function ds_render_mobile_image_metabox($post): void
 {
-    $mobile_image = get_post_meta( $post->ID, 'mobile_image', true );
+    $mobile_image = get_post_meta($post->ID, 'mobile_image', true);
     ?>
     <div class="custom-media-uploader">
-        <img src="<?php echo esc_url( $mobile_image ); ?>"
+        <img src="<?php echo esc_url($mobile_image); ?>"
              alt=""
              style="max-width:100%;width:100%;">
-        <input type="hidden" id="mobile_image" name="mobile_image" value="<?php echo esc_attr( $mobile_image ); ?>" style="width: 100%;">
+        <input type="hidden" id="mobile_image" name="mobile_image" value="<?php echo esc_attr($mobile_image); ?>"
+               style="width: 100%;">
         <div class="" style="display: flex;align-items: center;column-gap: 16px">
             <button class="button button-secondary" id="upload_mobile_image">Выбрать</button>
             <button class="button" id="remove_mobile_image" style="display: none">Удалить</button>
@@ -48,12 +75,12 @@ function ds_render_mobile_image_metabox( $post ): void
     </div>
 
     <script>
-        jQuery(document).ready(function($){
+        jQuery(document).ready(function ($) {
             let customUploader;
             const uploadButton = document.querySelector('button#upload_mobile_image');
             const removeButton = document.querySelector('button#remove_mobile_image');
 
-            $('#upload_mobile_image').on('click', function(e){
+            $('#upload_mobile_image').on('click', function (e) {
                 e.preventDefault();
 
                 if (customUploader) {
@@ -69,7 +96,7 @@ function ds_render_mobile_image_metabox( $post ): void
                     multiple: false
                 });
 
-                customUploader.on('select', function() {
+                customUploader.on('select', function () {
                     const attachment = customUploader.state().get('selection').first().toJSON();
                     $('#mobile_image').val(attachment.url);
                     $('.custom-media-uploader img').attr('src', attachment.url);
@@ -80,7 +107,7 @@ function ds_render_mobile_image_metabox( $post ): void
                 customUploader.open();
             });
 
-            $('#remove_mobile_image').on('click', function() {
+            $('#remove_mobile_image').on('click', function () {
                 $('#mobile_image').val('');
                 $('.custom-media-uploader img').attr('src', '');
                 uploadButton.innerHTML = 'Выбрать';
@@ -91,26 +118,50 @@ function ds_render_mobile_image_metabox( $post ): void
     <?php
 }
 
-function ds_save_mobile_image( $post_id ): void
+function ds_render_cover_metabox($post): void
 {
-    if ( isset( $_POST['mobile_image'] ) ) {
-        update_post_meta( $post_id, 'mobile_image', esc_url_raw( $_POST['mobile_image'] ) );
+    $cover = get_post_meta($post->ID, 'cover', true);
+    ?>
+    <div class="custom-cover-checkbox">
+        <label>
+            <input type="checkbox" id="cover" name="cover" <?php checked($cover, true); ?>>
+            Использовать "cover"
+        </label>
+    </div>
+    <?php
+}
+
+function ds_save_mobile_image($post_id): void
+{
+    if (isset($_POST['mobile_image'])) {
+        update_post_meta($post_id, 'mobile_image', esc_url_raw($_POST['mobile_image']));
     }
 }
 
-function ds_mobile_image_metabox_scripts( $hook ): void
+function ds_save_cover($post_id): void
+{
+    if (isset($_POST['cover'])) {
+        update_post_meta($post_id, 'cover', true);
+    } else {
+        update_post_meta($post_id, 'cover', false);
+    }
+}
+
+function ds_mobile_image_metabox_scripts($hook): void
 {
     global $post_type;
 
-    if ( ( 'post.php' !== $hook && 'post-new.php' !== $hook ) ||
-        ( 'post' !== $post_type && 'case' !== $post_type ) ) {
+    if (('post.php' !== $hook && 'post-new.php' !== $hook) ||
+        ('post' !== $post_type && 'case' !== $post_type)) {
         return;
     }
 
     wp_enqueue_media();
 }
 
-add_action( 'init', 'ds_register_meta_mobile_image' );
-add_action( 'add_meta_boxes', 'ds_add_mobile_image_metabox' );
-add_action( 'save_post', 'ds_save_mobile_image' );
-add_action( 'admin_enqueue_scripts', 'ds_mobile_image_metabox_scripts' );
+add_action('init', 'ds_register_meta_mobile_image');
+add_action('init', 'ds_register_meta_cover');
+add_action('add_meta_boxes', 'ds_add_mobile_image_metabox');
+add_action('save_post', 'ds_save_mobile_image');
+add_action('save_post', 'ds_save_cover');
+add_action('admin_enqueue_scripts', 'ds_mobile_image_metabox_scripts');

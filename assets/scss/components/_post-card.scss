@@ -55,7 +55,7 @@
 
     &_mob-image {
       display: block;
-      object-fit: cover;
+      object-fit: contain;
 
       @media(min-width: 767px) {
         display: none;
@@ -130,6 +130,13 @@
       @media(min-width: 767px) {
         display: block;
       }
+    }
+  }
+
+  &.ds-post__mob-cover {
+
+    .ds-post__inner_mob-image {
+      object-fit: cover;
     }
   }
 }
