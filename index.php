@@ -81,5 +81,7 @@ get_header();
         </div>
 
     </main>
+<!-- For tailwind -->
+<!--<span class="rounded-lg rounded-xl rounded-2xl"></span>-->
 <?php
 get_footer();
