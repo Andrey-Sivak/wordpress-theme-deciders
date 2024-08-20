@@ -1,6 +1,11 @@
 .ds-post-content {
   letter-spacing: 0.4px;
 
+  a {
+    text-decoration: underline;
+    color: #63A2ED;
+  }
+
   p,
   ul,
   ol,
