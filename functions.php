@@ -312,9 +312,9 @@ function ds_get_unified_post_types_array(array $options = array()): array
         if ($args['service_id'] && $args['service_id'] !== 'all') {
             $case_args['meta_query'] = array(
                 array(
-                    'key' => '_associated_service',
+                    'key' => '_associated_services',
                     'value' => $args['service_id'],
-                    'compare' => '='
+                    'compare' => 'LIKE'
                 )
             );
         }

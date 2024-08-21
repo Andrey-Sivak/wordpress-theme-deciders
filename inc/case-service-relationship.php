@@ -14,7 +14,10 @@ add_action('add_meta_boxes', 'add_case_service_metabox');
 function ds_render_case_service_metabox($post) {
     wp_nonce_field('case_service_metabox', 'case_service_metabox_nonce');
 
-    $associated_service = get_post_meta($post->ID, '_associated_service', true);
+    $associated_services = get_post_meta($post->ID, '_associated_services', true);
+    if (!is_array($associated_services)) {
+        $associated_services = array();
+    }
 
     $services = get_posts(array(
         'post_type' => 'service',
@@ -23,19 +26,11 @@ function ds_render_case_service_metabox($post) {
         'order' => 'ASC',
     ));
 
-    echo '<select name="associated_service" id="associated_service">';
-    echo '<option value="">Выберите сервис</option>';
-
+    echo '<div class="case-service-checkboxes">';
     foreach ($services as $service) {
-        echo sprintf(
-            '<option value="%s" %s>%s</option>',
-            esc_attr($service->ID),
-            selected($associated_service, $service->ID, false),
-            esc_html($service->post_title)
-        );
+        echo '<label><input type="checkbox" name="associated_services[]" value="' . esc_attr($service->ID) . '"' . checked(in_array($service->ID, $associated_services), true, false) . '> ' . esc_html($service->post_title) . '</label><br>';
     }
-
-    echo '</select>';
+    echo '</div>';
 }
 
 function ds_save_case_service_metabox($post_id) {
@@ -52,32 +47,36 @@ function ds_save_case_service_metabox($post_id) {
         return;
     }
 
-    if (isset($_POST['associated_service'])) {
+    if (isset($_POST['associated_services'])) {
         update_post_meta(
             $post_id,
-            '_associated_service',
-            sanitize_text_field($_POST['associated_service'])
+            '_associated_services',
+            array_map('sanitize_text_field', $_POST['associated_services'])
         );
     } else {
-        delete_post_meta($post_id, '_associated_service');
+        delete_post_meta($post_id, '_associated_services');
     }
 }
 add_action('save_post_case', 'ds_save_case_service_metabox');
 
 function add_case_service_column($columns) {
-    $columns['associated_service'] = 'Сервис';
+    $columns['associated_services'] = 'Сервисы';
     return $columns;
 }
 add_filter('manage_case_posts_columns', 'add_case_service_column');
 
 function ds_display_case_service_column($column, $post_id) {
-    if ($column === 'associated_service') {
-        $service_id = get_post_meta($post_id, '_associated_service', true);
-        if ($service_id) {
-            $service = get_post($service_id);
-            if ($service) {
-                echo esc_html($service->post_title);
+    if ($column === 'associated_services') {
+        $associated_services = get_post_meta($post_id, '_associated_services', true);
+        if (!empty($associated_services)) {
+            $service_titles = array();
+            foreach ($associated_services as $service_id) {
+                $service = get_post($service_id);
+                if ($service) {
+                    $service_titles[] = esc_html($service->post_title);
+                }
             }
+            echo implode(', ', $service_titles);
         } else {
             echo '—';
         }
