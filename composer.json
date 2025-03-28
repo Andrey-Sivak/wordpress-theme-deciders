@@ -6,12 +6,12 @@
         "WordPress",
         "Themes"
     ],
-    "homepage": "https://github.com/Andrey-Sivak/deciders",
+    "homepage": "https://github.com/Andrey-Sivak/wordpress-theme-deciders",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Andrey-Sivak && Contributors",
-            "homepage": "https://github.com/Andrey-Sivak/deciders/graphs/contributors"
+            "homepage": "https://github.com/Andrey-Sivak/wordpress-theme-deciders/graphs/contributors"
         }
     ],
     "require": {
@@ -55,7 +55,7 @@
         "phpcsi": "phpcs -i"
     },
     "support": {
-        "issues": "https://github.com/Andrey-Sivak/deciders/issues",
-        "source": "https://github.com/Andrey-Sivak/deciders"
+        "issues": "https://github.com/Andrey-Sivak/wordpress-theme-deciders/issues",
+        "source": "https://github.com/Andrey-Sivak/wordpress-theme-deciders"
     }
 }

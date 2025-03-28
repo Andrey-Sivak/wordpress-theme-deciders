@@ -10,13 +10,13 @@
     "WordPress",
     "Theme"
   ],
-  "homepage": "https://github.com/Andrey-Sivak/deciders",
+  "homepage": "https://github.com/Andrey-Sivak/wordpress-theme-deciders",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Andrey-Sivak/deciders.get"
+    "url": "git+https://github.com/Andrey-Sivak/wordpress-theme-deciders.get"
   },
   "bugs": {
-    "url": "https://github.com/Andrey-Sivak/deciders/issues"
+    "url": "https://github.com/Andrey-Sivak/wordpress-theme-deciders/issues"
   },
   "browserslist": [
     "> 1%",
