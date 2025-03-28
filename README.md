@@ -3,7 +3,7 @@
 Deciders theme
 ===
 
-Hi. This theme, called `Deciders theme`, is based on the starting theme `underscores`. This theme is developed for https://zigmund.online/blog/deciders/
+Hi. This theme, called `Deciders theme`, is based on the starting theme `underscores`. This theme is developed for
 
 Installation
 ---------------

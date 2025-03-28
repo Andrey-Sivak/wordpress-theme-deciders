@@ -6,12 +6,12 @@
         "WordPress",
         "Themes"
     ],
-    "homepage": "https://github.com/WEBzaytsev/deciders",
+    "homepage": "https://github.com/Andrey-Sivak/deciders",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
-            "name": "WEBzaytsev && Contributors",
-            "homepage": "https://github.com/WEBzaytsev/deciders/graphs/contributors"
+            "name": "Andrey-Sivak && Contributors",
+            "homepage": "https://github.com/Andrey-Sivak/deciders/graphs/contributors"
         }
     ],
     "require": {
@@ -55,7 +55,7 @@
         "phpcsi": "phpcs -i"
     },
     "support": {
-        "issues": "https://github.com/WEBzaytsev/deciders/issues",
-        "source": "https://github.com/WEBzaytsev/deciders"
+        "issues": "https://github.com/Andrey-Sivak/deciders/issues",
+        "source": "https://github.com/Andrey-Sivak/deciders"
     }
 }

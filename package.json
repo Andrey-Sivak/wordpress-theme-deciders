@@ -4,19 +4,19 @@
   "description": "",
   "main": "gulpfile.js",
   "type": "module",
-  "author": "WEBzaytsev && Contributors",
+  "author": "Andrey-Sivak && Contributors",
   "license": "ISC",
   "keywords": [
     "WordPress",
     "Theme"
   ],
-  "homepage": "https://github.com/WEBzaytsev/deciders",
+  "homepage": "https://github.com/Andrey-Sivak/deciders",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WEBzaytsev/deciders.get"
+    "url": "git+https://github.com/Andrey-Sivak/deciders.get"
   },
   "bugs": {
-    "url": "https://github.com/WEBzaytsev/deciders/issues"
+    "url": "https://github.com/Andrey-Sivak/deciders/issues"
   },
   "browserslist": [
     "> 1%",
