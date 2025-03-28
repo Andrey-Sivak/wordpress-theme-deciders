@@ -2,7 +2,7 @@
 function ds_add_service_icon_metabox() {
     add_meta_box(
         'service_icon_metabox',
-        'Иконка',
+        'Icon',
         'ds_render_service_icon_metabox',
         'service',
         'side',
@@ -25,9 +25,9 @@ function ds_render_service_icon_metabox($post) {
             <?php endif; ?>
         </div>
         <input type="hidden" name="service_icon_id" id="service_icon_id" value="<?php echo esc_attr($icon_id); ?>" />
-        <button type="button" class="upload_icon_button button"><?php echo $icon_id ? 'Изменить' : 'Выбрать'; ?></button>
+        <button type="button" class="upload_icon_button button"><?php echo $icon_id ? 'Change' : 'Select'; ?></button>
         <?php if ($icon_id) : ?>
-            <button type="button" class="remove_icon_button button"><?php echo 'Удалить'; ?></button>
+            <button type="button" class="remove_icon_button button"><?php echo 'Remove'; ?></button>
         <?php endif; ?>
     </div>
     <script>
@@ -42,9 +42,9 @@ function ds_render_service_icon_metabox($post) {
                     return;
                 }
                 frame = wp.media({
-                    title: 'Выберите иконку для сервиса',
+                    title: 'Select icon for Service',
                     button: {
-                        text: 'Использовать это изображение'
+                        text: 'Use this image'
                     },
                     multiple: false
                 });
@@ -52,7 +52,7 @@ function ds_render_service_icon_metabox($post) {
                     var attachment = frame.state().get('selection').first().toJSON();
                     $('#service_icon_id').val(attachment.id);
                     $('.service-icon-preview').html('<img src="' + attachment.url + '" style="max-width: 100%; height: auto;" />');
-                    $('.upload_icon_button').text('Изменить');
+                    $('.upload_icon_button').text('Change');
                     $('.remove_icon_button').show();
                 });
                 frame.open();
@@ -61,7 +61,7 @@ function ds_render_service_icon_metabox($post) {
                 e.preventDefault();
                 $('#service_icon_id').val('');
                 $('.service-icon-preview').html('');
-                $('.upload_icon_button').text('Выбрать');
+                $('.upload_icon_button').text('Select');
                 $(this).hide();
             });
         });
@@ -100,7 +100,7 @@ function ds_add_service_icon_column($columns) {
     foreach ($columns as $key => $value) {
         if ($key === 'title') {
             $new_columns[$key] = $value;
-            $new_columns['service_icon'] = 'Иконка';
+            $new_columns['service_icon'] = 'Icon';
         } else {
             $new_columns[$key] = $value;
         }

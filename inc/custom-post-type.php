@@ -5,31 +5,32 @@
  * @package ds
  */
 
-function ds_service_create_post_type() {
+function ds_service_create_post_type()
+{
     $labels = [
-        'name'               => 'Услуги',
-        'singular_name'      => 'Услуга',
-        'add_new'            => 'Добавить услугу',
-        'add_new_item'       => 'Добавить новую услугу',
-        'edit_item'          => 'Редактировать услугу',
-        'new_item'           => 'Новая услуга',
-        'view_item'          => 'Смотреть услугу',
-        'search_items'       => 'Искать услугу',
-        'not_found'          => 'Услуг не найдено',
-        'not_found_in_trash' => 'Не найдено услуг в корзине',
-        'parent_item_colon'  => '',
-        'menu_name'          => 'Услуги',
+        'name' => 'Services',
+        'singular_name' => 'Service',
+        'add_new' => 'Add Service',
+        'add_new_item' => 'Add New Service',
+        'edit_item' => 'Edit Service',
+        'new_item' => 'New Service',
+        'view_item' => 'View Service',
+        'search_items' => 'Search Service',
+        'not_found' => 'No Services Found',
+        'not_found_in_trash' => 'No Services Found in Trash',
+        'parent_item_colon' => '',
+        'menu_name' => 'Services',
     ];
-    $args   = [
-        'labels'        => $labels,
-        'has_archive'   => false,
-        'public'        => true,
-        'hierarchical'  => true,
+    $args = [
+        'labels' => $labels,
+        'has_archive' => false,
+        'public' => true,
+        'hierarchical' => true,
         'menu_position' => 5,
-        'menu_icon'     => 'dashicons-clipboard',
-        'show_in_rest'  => true,
+        'menu_icon' => 'dashicons-clipboard',
+        'show_in_rest' => true,
         'show_in_nav_menus' => true,
-        'supports'      => [
+        'supports' => [
             'title',
             'editor',
             'excerpt',
@@ -41,31 +42,32 @@ function ds_service_create_post_type() {
     register_post_type('service', $args);
 }
 
-function ds_case_create_post_type() {
+function ds_case_create_post_type()
+{
     $labels = [
-        'name'               => 'case',
-        'singular_name'      => 'Кейс',
-        'add_new'            => 'Добавить кейс',
-        'add_new_item'       => 'Добавить новый кейс',
-        'edit_item'          => 'Редактировать кейс',
-        'new_item'           => 'Новый кейс',
-        'view_item'          => 'Смотреть кейс',
-        'search_items'       => 'Искать кейс',
-        'not_found'          => 'Кейсов не найдено',
-        'not_found_in_trash' => 'Не найдено кейсов в корзине',
-        'parent_item_colon'  => 'dashicons-book-alt',
-        'menu_name'          => 'Кейсы',
+        'name' => 'Cases',
+        'singular_name' => 'Case',
+        'add_new' => 'Add Case',
+        'add_new_item' => 'Add New Case',
+        'edit_item' => 'Edit Case',
+        'new_item' => 'New Case',
+        'view_item' => 'View Case',
+        'search_items' => 'Search Case',
+        'not_found' => 'No Cases Found',
+        'not_found_in_trash' => 'No Cases Found in Trash',
+        'parent_item_colon' => 'dashicons-book-alt',
+        'menu_name' => 'Cases',
     ];
-    $args   = [
-        'labels'        => $labels,
-        'has_archive'   => true,
-        'public'        => true,
-        'hierarchical'  => true,
+    $args = [
+        'labels' => $labels,
+        'has_archive' => true,
+        'public' => true,
+        'hierarchical' => true,
         'menu_position' => 6,
-        'menu_icon'   => 'dashicons-editor-code',
-        'show_in_rest'  => true,
+        'menu_icon' => 'dashicons-editor-code',
+        'show_in_rest' => true,
         'show_in_nav_menus' => true,
-        'supports'      => [
+        'supports' => [
             'title',
             'editor',
             'excerpt',
@@ -76,5 +78,5 @@ function ds_case_create_post_type() {
             'comments',
         ],
     ];
-    register_post_type( 'case', $args );
+    register_post_type('case', $args);
 }

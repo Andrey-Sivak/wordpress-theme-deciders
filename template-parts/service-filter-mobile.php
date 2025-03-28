@@ -11,7 +11,7 @@ $ds_services = get_posts(array(
 <div class="ds-mobile-filters fixed md:hidden block top-5 -translate-y-[150px] left-5 bg-deciders-dark py-2 rounded-2xl transition-all duration-500 z-40 border border-white/20">
     <div class="ds-mobile-filters__button flex items-center gap-3 px-5">
         <span class="ds-mobile-filters__button_icon"><?php get_template_part('/vector-images/icon', 'all-service-filter'); ?></span>
-        <div class="ds-mobile-filters__button_text font-semibold">Все</div>
+        <div class="ds-mobile-filters__button_text font-semibold">All</div>
     </div>
     <ul class="ds-mobile-filters__list mt-2 gap-0.5 hidden">
         <li
@@ -19,7 +19,7 @@ $ds_services = get_posts(array(
                 data-service-id="all"
         >
             <span class="service-item-mob__icon"><?php get_template_part('/vector-images/icon', 'all-service-filter'); ?></span>
-            <span class="service-item-mob__text font-semibold">Все</span>
+            <span class="service-item-mob__text font-semibold">All</span>
         </li>
         <?php
         foreach ($ds_services as $ds_service) :

@@ -40,7 +40,7 @@ function ds_add_mobile_image_metabox(): void
     foreach ($ds_post_types as $post_type) {
         add_meta_box(
             'mobile_image_metabox',
-            'Изображение для мобильных устройств',
+            'Image for mobile devices',
             'ds_render_mobile_image_metabox',
             $post_type,
             'side',
@@ -49,7 +49,7 @@ function ds_add_mobile_image_metabox(): void
 
         add_meta_box(
             'cover_metabox',
-            'Отображение',
+            'Display',
             'ds_render_cover_metabox',
             $post_type,
             'side',
@@ -69,8 +69,8 @@ function ds_render_mobile_image_metabox($post): void
         <input type="hidden" id="mobile_image" name="mobile_image" value="<?php echo esc_attr($mobile_image); ?>"
                style="width: 100%;">
         <div class="" style="display: flex;align-items: center;column-gap: 16px">
-            <button class="button button-secondary" id="upload_mobile_image">Выбрать</button>
-            <button class="button" id="remove_mobile_image" style="display: none">Удалить</button>
+            <button class="button button-secondary" id="upload_mobile_image">Select</button>
+            <button class="button" id="remove_mobile_image" style="display: none">Remove</button>
         </div>
     </div>
 
@@ -89,9 +89,9 @@ function ds_render_mobile_image_metabox($post): void
                 }
 
                 customUploader = wp.media({
-                    title: 'Выбрать дополнительное изображение',
+                    title: 'Select additional image',
                     button: {
-                        text: 'Выбрать'
+                        text: 'Select'
                     },
                     multiple: false
                 });
@@ -100,7 +100,7 @@ function ds_render_mobile_image_metabox($post): void
                     const attachment = customUploader.state().get('selection').first().toJSON();
                     $('#mobile_image').val(attachment.url);
                     $('.custom-media-uploader img').attr('src', attachment.url);
-                    uploadButton.innerHTML = 'Изменить';
+                    uploadButton.innerHTML = 'Change';
                     removeButton.style.display = 'block';
                 });
 
@@ -110,7 +110,7 @@ function ds_render_mobile_image_metabox($post): void
             $('#remove_mobile_image').on('click', function () {
                 $('#mobile_image').val('');
                 $('.custom-media-uploader img').attr('src', '');
-                uploadButton.innerHTML = 'Выбрать';
+                uploadButton.innerHTML = 'Select';
                 removeButton.style.display = 'none';
             });
         });
@@ -125,7 +125,7 @@ function ds_render_cover_metabox($post): void
     <div class="custom-cover-checkbox">
         <label>
             <input type="checkbox" id="cover" name="cover" <?php checked($cover, true); ?>>
-            Использовать "cover"
+            Use "cover"
         </label>
     </div>
     <?php

@@ -1,5 +1,6 @@
 <?php
-function theme_social_links_callback() {
+function theme_social_links_callback()
+{
     $options = get_option('theme_settings');
     $social_links = $options['social_links'] ?? array();
     ?>
@@ -9,27 +10,30 @@ function theme_social_links_callback() {
             foreach ($social_links as $index => $link) {
                 ?>
                 <div class="social-link-item">
-                    <input type="hidden" name="theme_settings[social_links][<?php echo $index; ?>][icon]" value="<?php echo esc_attr($link['icon']); ?>" class="social-icon-input">
+                    <input type="hidden" name="theme_settings[social_links][<?php echo $index; ?>][icon]"
+                           value="<?php echo esc_attr($link['icon']); ?>" class="social-icon-input">
                     <img
-                        src="<?php echo esc_url($link['icon']); ?>"
-                        alt="Social Icon"
-                        style="max-width:50px;height:auto;vertical-align:middle;margin-right:10px;"
-                        class="<?php echo $link['icon'] ? '' : 'hidden' ?>"
+                            src="<?php echo esc_url($link['icon']); ?>"
+                            alt="Social Icon"
+                            style="max-width:50px;height:auto;vertical-align:middle;margin-right:10px;"
+                            class="<?php echo $link['icon'] ? '' : 'hidden' ?>"
                     >
-                    <input type="button" class="button upload-social-icon" value="<?php echo $link['icon'] ? 'Изменить иконку' : 'Выбрать иконку' ?>" style="vertical-align:middle;">
+                    <input type="button" class="button upload-social-icon"
+                           value="<?php echo $link['icon'] ? 'Change Icon' : 'Select Icon' ?>"
+                           style="vertical-align:middle;">
                     <input type="url"
                            name="theme_settings[social_links][<?php echo $index; ?>][url]"
                            value="<?php echo esc_url($link['url']); ?>"
-                           placeholder="ссылка"
+                           placeholder="Link"
                            class="regular-text">
-                    <button type="button" class="button remove-social-link">Удалить</button>
+                    <button type="button" class="button remove-social-link">Remove</button>
                 </div>
                 <?php
             }
         }
         ?>
     </div>
-    <button type="button" class="button" id="add-social-link">Добавить</button>
+    <button type="button" class="button" id="add-social-link">Add</button>
 
     <style>
         .social-link-item {
@@ -37,6 +41,7 @@ function theme_social_links_callback() {
             align-items: center;
             margin-bottom: 10px;
         }
+
         .social-link-item input {
             margin-right: 10px;
         }

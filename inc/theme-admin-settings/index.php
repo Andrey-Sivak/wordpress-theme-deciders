@@ -2,8 +2,8 @@
 function ds_theme_settings_page(): void
 {
     add_menu_page(
-        'Настройки темы',
-        'Настройки темы',
+        'Theme Settings',
+        'Theme Settings',
         'manage_options',
         'theme-settings',
         'ds_theme_settings_page_content',
@@ -18,7 +18,7 @@ function ds_theme_settings_page_content(): void
 {
     ?>
     <div class="wrap">
-        <h1>Настройки темы</h1>
+        <h1>Theme Settings</h1>
         <form method="post" action="options.php">
             <?php
             settings_fields('theme_settings');
@@ -43,7 +43,7 @@ function ds_theme_register_settings(): void
 
     add_settings_field(
         'logo',
-        'Логотип',
+        'Logo',
         'ds_theme_logo_callback',
         'theme-settings',
         'theme_general_section'
@@ -51,7 +51,7 @@ function ds_theme_register_settings(): void
 
     add_settings_field(
         'about_text',
-        'Об агентстве',
+        'About Agency',
         'ds_theme_about_text_callback',
         'theme-settings',
         'theme_general_section'
@@ -59,7 +59,7 @@ function ds_theme_register_settings(): void
 
     add_settings_field(
         'default_post_title_icon',
-        'Иконка для заголовков по умолчанию',
+        'Default icon for headings',
         'ds_theme_default_post_title_icon',
         'theme-settings',
         'theme_general_section'
@@ -67,7 +67,7 @@ function ds_theme_register_settings(): void
 
     add_settings_field(
         'home_menu_icon',
-        'Иконка главной страницы в меню',
+        'Home page icon in the menu',
         'ds_theme_home_menu_icon',
         'theme-settings',
         'theme_general_section'
@@ -75,14 +75,14 @@ function ds_theme_register_settings(): void
 
     add_settings_section(
         'theme_contact_section',
-        'Контактные данные',
+        'Contact data',
         'theme_contact_section_callback',
         'theme-settings'
     );
 
     add_settings_field(
         'schedule',
-        'График работы',
+        'Schedule',
         'theme_schedule_callback',
         'theme-settings',
         'theme_contact_section'
@@ -90,7 +90,7 @@ function ds_theme_register_settings(): void
 
     add_settings_field(
         'phone',
-        'Телефон',
+        'Phone',
         'theme_phone_callback',
         'theme-settings',
         'theme_contact_section'
@@ -106,7 +106,7 @@ function ds_theme_register_settings(): void
 
     add_settings_field(
         'short_text',
-        'Краткий текст внизу блока контактов',
+        'Short text at the bottom of the contacts section',
         'theme_short_text_callback',
         'theme-settings',
         'theme_contact_section'
@@ -114,7 +114,7 @@ function ds_theme_register_settings(): void
 
     add_settings_field(
         'social_links',
-        'Соц сети',
+        'Socials',
         'theme_social_links_callback',
         'theme-settings',
         'theme_contact_section'

@@ -9,7 +9,7 @@ $ds_services = get_posts(array(
 ?>
 
 <div class="info-block-inner-block service-filter mb-3" id="service-filter">
-    <p class="text-20 leading-1.2 mb-2.5">Фильтр по услугам:</p>
+    <p class="text-20 leading-1.2 mb-2.5">Filter by services:</p>
     <ul
         class="service-grid flex gap-x-1.5 gap-y-3.5 flex-wrap transition-all duration-300"
         id="service-grid"
@@ -17,7 +17,7 @@ $ds_services = get_posts(array(
         <li class="service-item" data-service-id="all">
             <button class="service-filter-btn active flex items-center gap-x-2.5 py-1.5 cursor-pointer">
                 <span><?php get_template_part('/vector-images/icon', 'all-service-filter'); ?></span>
-                <span class="font-bold">Все</span>
+                <span class="font-bold">All</span>
             </button>
         </li>
 

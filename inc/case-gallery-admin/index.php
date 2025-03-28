@@ -3,7 +3,7 @@ function ds_add_case_gallery_meta_box()
 {
     add_meta_box(
         'case_gallery_meta_box',
-        'Галерея',
+        'Gallery',
         'ds_render_case_gallery_meta_box',
         'case',
         'normal',
@@ -28,7 +28,7 @@ function ds_render_case_gallery_meta_box($post)
                     $image_url = wp_get_attachment_image_url($image_id, 'thumbnail');
                     echo '<div class="gallery-image-wrapper" data-id="' . esc_attr($image_id) . '">';
                     echo '<img src="' . esc_url($image_url) . '" />';
-                    echo '<button type="button" class="remove-image">Удалить</button>';
+                    echo '<button type="button" class="remove-image">Remove</button>';
                     echo '</div>';
                 }
             }
@@ -36,7 +36,7 @@ function ds_render_case_gallery_meta_box($post)
         </div>
         <input type="hidden" name="case_gallery_images" id="case_gallery_images"
                value="<?php echo esc_attr(implode(',', (array)$gallery_images)); ?>"/>
-        <button type="button" id="add_gallery_images" class="button">Выбрать изображения</button>
+        <button type="button" id="add_gallery_images" class="button">Select Image</button>
     </div>
     <?php
 }

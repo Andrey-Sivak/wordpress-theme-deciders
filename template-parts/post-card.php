@@ -25,7 +25,7 @@ if ($ds_additional_thumbnail_cover) {
             get_template_part('/template-parts/advanced-image', null, array(
                 'img_id' => get_post_thumbnail_id($ds_post_data['id']),
                 'class' => 'ds-post__inner_thumbnail',
-                'alt' => 'Изображение для' . $ds_post_data['title'],
+                'alt' => 'Image for' . $ds_post_data['title'],
             ));
         }
         ?>
@@ -35,7 +35,7 @@ if ($ds_additional_thumbnail_cover) {
             get_template_part('/template-parts/advanced-image', null, array(
                 'img_id' => $ds_additional_thumbnail_id,
                 'class' => 'ds-post__inner_mob-image',
-                'alt' => 'Изображение для' . $ds_post_data['title'],
+                'alt' => 'Image for' . $ds_post_data['title'],
             ));
         }
         ?>

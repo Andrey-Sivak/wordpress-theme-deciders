@@ -2,7 +2,7 @@
 function add_case_service_metabox() {
     add_meta_box(
         'case_service_metabox',
-        'Сервис',
+        'Service',
         'ds_render_case_service_metabox',
         'case',
         'side',

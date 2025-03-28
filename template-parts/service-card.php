@@ -22,7 +22,7 @@ $ds_service_data = $args['service'];
 
         <a href="<?php echo $ds_service_data['permalink']; ?>"
            class="info-block-inner-block-btn">
-            Подробно об услуге
+            Details about the service
         </a>
     </div>
 </div>

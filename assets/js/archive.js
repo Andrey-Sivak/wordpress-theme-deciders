@@ -245,7 +245,7 @@ class CaseFilter {
 					this.masonry.reloadItems();
 				} else {
 					this.casesList.innerHTML =
-						'В выбранной категории еще нет доступных кейсов';
+						'In the selected category, there are no available cases yet';
 					this.loading = false;
 					return;
 				}

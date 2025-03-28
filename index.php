@@ -12,11 +12,11 @@ get_header();
                 'url' => $ds_theme_settings['logo'],
             )) ?>
             <div class="info-block-inner-block">
-                <p class="info-block-inner-block-heading">Об агентстве</p>
+                <p class="info-block-inner-block-heading">About Agency</p>
                 <p class="info-block-inner-block-text">
                     <?php echo wp_kses_post($ds_theme_settings['about_text']); ?>
                 </p>
-                <a href="#" class="info-block-inner-block-btn">Подробно об агенстве</a>
+                <a href="#" class="info-block-inner-block-btn">Details about the Agency</a>
             </div>
             <?php get_template_part('template-parts/service-list'); ?>
         </div>
@@ -41,11 +41,11 @@ get_header();
                             'url' => $ds_theme_settings['logo'],
                     )) ?>
                     <div class="info-block-inner-block">
-                        <p class="info-block-inner-block-heading">Об агентстве</p>
+                        <p class="info-block-inner-block-heading">About Agency</p>
                         <p class="info-block-inner-block-text">
                             <?php echo wp_kses_post($ds_theme_settings['about_text']); ?>
                         </p>
-                        <a href="#" class="info-block-inner-block-btn">Подробно об агенстве</a>
+                        <a href="#" class="info-block-inner-block-btn">Details about the Agency</a>
                     </div>
                     <?php get_template_part('template-parts/service-list'); ?>
                 </div>
