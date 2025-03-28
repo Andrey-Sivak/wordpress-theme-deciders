@@ -39,21 +39,6 @@ if ($ds_additional_thumbnail_cover) {
             ));
         }
         ?>
-
-<!--        --><?php
-//        if ($ds_additional_thumbnail) {
-//            echo wp_get_attachment_image(
-//                $ds_additional_thumbnail_id,
-//                'large',
-//                false,
-//                [
-//                    'class' => 'ds-post__inner_mob-image',
-//                    'alt' => $ds_post_data['title'],
-//                    'loading' => 'lazy',
-//                ]
-//            );
-//        }
-//        ?>
         <span class="ds-post__inner_content">
             <span class="ds-post__inner_title"><?php echo $ds_post_data['title']; ?></span>
             <span class="ds-post__inner_excerpt"><?php echo $ds_post_data['excerpt']; ?></span>
