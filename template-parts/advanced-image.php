@@ -5,16 +5,13 @@ $img_alt = $args['alt'];
 
 if ($img_id) :
     $image_sizes = ['medium', 'large', 'full'];
-    $webp_srcset = [];
     $original_srcset = [];
     $sizes = [];
 
     foreach ($image_sizes as $size) {
-        $webp_url = serve_webp_image($img_id, $size);
         $original_image = wp_get_attachment_image_src($img_id, $size);
 
         if ($original_image) {
-            $webp_srcset[] = $webp_url . ' ' . $original_image[1] . 'w';
             $original_srcset[] = $original_image[0] . ' ' . $original_image[1] . 'w';
             $sizes[] = '(max-width: ' . $original_image[1] . 'px) 100vw';
         }
@@ -27,14 +24,10 @@ if ($img_id) :
     $height = $default_image[2];
     $image_alt = $img_alt ?? get_post_meta($img_id, '_wp_attachment_image_alt', true);
 
-    $webp_srcset_attr = implode(', ', $webp_srcset);
     $original_srcset_attr = implode(', ', $original_srcset);
     $sizes_attr = implode(', ', array_reverse($sizes)) . ', 100vw';
     ?>
     <picture>
-        <source srcset="<?php echo esc_attr($webp_srcset_attr); ?>"
-                sizes="<?php echo esc_attr($sizes_attr); ?>"
-                type="image/webp">
         <source srcset="<?php echo esc_attr($original_srcset_attr); ?>"
                 sizes="<?php echo esc_attr($sizes_attr); ?>"
                 type="image/<?php echo pathinfo($default_url, PATHINFO_EXTENSION); ?>">
